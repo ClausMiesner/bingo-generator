@@ -11,8 +11,8 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
 
 public class Table {
 
-  private int numberOfRows;
-  private List<String> inputs;
+  private final int numberOfRows;
+  private final List<String> inputs;
   private Row[] rows;
   private char textAlignment = CENTER_ALIGN;
   private boolean hasLineSeparators = true;
