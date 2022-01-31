@@ -17,8 +17,8 @@ public class Row {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    for (int i = 0; i < inputs.size(); i++) {
-      stringBuilder.append(inputs.get(i))
+    for (String input : inputs) {
+      stringBuilder.append(input)
               .append(" & ");
     }
     return stringBuilder.toString();
