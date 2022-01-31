@@ -6,23 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.miesner.claus.bingo.util.latex.LatexExpression.CENTER_ALIGN;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPECIFICATION_OFFSET;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
 
 public class Table {
 
   private final int numberOfRows;
   private final List<String> inputs;
-  private Row[] rows;
+  private final Row[] rows;
   private char textAlignment = CENTER_ALIGN;
   private boolean hasLineSeparators = true;
 
   public Table(int numberOfRows, List<String> inputs) {
     this.numberOfRows = numberOfRows;
     this.inputs = inputs;
-    if (numberOfRowsMatchInputs()) {
+    if (!numberOfRowsMatchInputs()) {
+      throw new IllegalArgumentException("Number of inputs does not match number of rows." +
+              " The number of inputs must be the square of the number of rows.");
+    } else {
       this.rows = createRows();
     }
   }

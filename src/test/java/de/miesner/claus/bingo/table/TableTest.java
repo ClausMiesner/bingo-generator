@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TableTest {
   Table table;
@@ -36,6 +37,16 @@ class TableTest {
     };
 
     assertThat(table.createRows(), is(expected));
+  }
+
+  @Test
+  public void testTooManyInputs() {
+    assertThrows(IllegalArgumentException.class, () -> new Table(1, List.of("one", "two")));
+  }
+
+  @Test
+  public void testTooManyRowsWanted() {
+    assertThrows(IllegalArgumentException.class, () -> new Table(1, List.of()));
   }
 
 }
