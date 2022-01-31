@@ -30,6 +30,10 @@ public class Table {
     }
   }
 
+  private boolean numberOfRowsMatchInputs() {
+    return this.numberOfRows == Math.sqrt(this.inputs.size());
+  }
+
   @VisibleForTesting
   Row[] createRows() {
     Row[] result = new Row[numberOfRows];
@@ -42,11 +46,6 @@ public class Table {
     }
     return result;
   }
-
-  private boolean numberOfRowsMatchInputs() {
-    return this.numberOfRows == Math.sqrt(this.inputs.size());
-  }
-
 
   @Override
   public String toString() {
