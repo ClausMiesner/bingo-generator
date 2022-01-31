@@ -10,6 +10,10 @@ public class Row {
     this.inputs = inputs;
   }
 
+  public List<String> getInputs() {
+    return inputs;
+  }
+
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
@@ -18,5 +22,15 @@ public class Row {
               .append(" & ");
     }
     return stringBuilder.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o.getClass() != getClass()) {
+      return false;
+    }
+    Row that = (Row) o;
+
+    return this.inputs.equals(that.inputs);
   }
 }

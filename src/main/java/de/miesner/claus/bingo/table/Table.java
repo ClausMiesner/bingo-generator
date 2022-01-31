@@ -1,5 +1,7 @@
 package de.miesner.claus.bingo.table;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +27,13 @@ public class Table {
     }
   }
 
-  private Row[] createRows() {
+  @VisibleForTesting
+  Row[] createRows() {
     Row[] result = new Row[numberOfRows];
     for (int i = 0; i < numberOfRows; i++) {
       List<String> partialInputs = new ArrayList<>(numberOfRows);
-      for (int j = 0; j < numberOfRows; j++) {
-        partialInputs.add(this.inputs.get(j + i));
+      for (int j = numberOfRows * i; j < (i + 1) * numberOfRows; j++) {
+        partialInputs.add(this.inputs.get(j));
       }
       result[i] = new Row(partialInputs);
     }
@@ -38,7 +41,7 @@ public class Table {
   }
 
   private boolean numberOfRowsMatchInputs() {
-    return this.numberOfRows == this.inputs.size();
+    return this.numberOfRows == Math.sqrt(this.inputs.size());
   }
 
 
@@ -53,7 +56,7 @@ public class Table {
               .append(TABLE_ROW_BREAK);
     }
     int indexLastRowBreak = stringBuilder.lastIndexOf(TABLE_ROW_BREAK);
-    stringBuilder.delete(indexLastRowBreak, indexLastRowBreak+1);
+    stringBuilder.delete(indexLastRowBreak, indexLastRowBreak + 1);
     stringBuilder.append(TABLE_END);
 
     return stringBuilder.toString();
