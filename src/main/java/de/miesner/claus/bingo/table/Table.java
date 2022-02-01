@@ -9,6 +9,7 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.CENTER_ALIGN;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPECIFICATION_OFFSET;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
 
 public class Table {
@@ -55,7 +56,8 @@ public class Table {
             .insert(TABLE_COLUMN_SPECIFICATION_OFFSET, createColumnLayout());
     for (int i = 0; i < numberOfRows; i++) {
       stringBuilder.append(rows[i].toString())
-              .append(TABLE_ROW_BREAK);
+              .append(TABLE_ROW_BREAK)
+              .append(TABLE_ROW_SEPARATOR);
     }
     int indexLastRowBreak = stringBuilder.lastIndexOf(TABLE_ROW_BREAK);
     stringBuilder.delete(indexLastRowBreak, indexLastRowBreak + TABLE_ROW_BREAK.length());

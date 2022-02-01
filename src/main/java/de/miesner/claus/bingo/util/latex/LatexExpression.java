@@ -12,6 +12,7 @@ public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 29;
 public static final char TABLE_COLUMN_SEPARATOR = '|';
 public static final String TABLE_ROW_BREAK = "\\\\";
 public static final String TABLE_ROW_ENTRY_CONNECTOR = " & ";
+public static final String TABLE_ROW_SEPARATOR = "\\hline";
 public static final String TABLE_END = "\\end{tabular}\n" +
                                         "\\end{table}";
 public static final char LEFT_ALIGN = 'l';
