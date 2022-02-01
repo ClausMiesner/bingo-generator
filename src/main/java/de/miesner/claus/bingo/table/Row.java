@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Row {
 
-  List<String> inputs;
+  private final List<String> inputs;
 
   public Row(List<String> inputs) {
     this.inputs = inputs;
@@ -26,7 +26,7 @@ public class Row {
 
   @Override
   public boolean equals(Object o) {
-    if (o.getClass() != getClass()) {
+    if (o == null || o.getClass() != getClass()) {
       return false;
     }
     Row that = (Row) o;

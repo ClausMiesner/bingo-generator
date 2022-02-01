@@ -18,18 +18,18 @@ class TableTest {
   );
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     this.table = new Table((int) Math.sqrt(sampleInputs.size()), sampleInputs);
   }
 
   @Test
-  public void testZeroInputsCreateRow() {
+  void testZeroInputsCreateRow() {
     this.table = new Table(0, List.of());
     assertThat(table.createRows(), is(new Row[0]));
   }
 
   @Test
-  public void testCorrectInputs() {
+  void testCorrectInputs() {
     Row[] expected = {
             new Row(List.of("one", "two", "three")),
             new Row(List.of("four", "five", "six")),
@@ -40,12 +40,12 @@ class TableTest {
   }
 
   @Test
-  public void testTooManyInputs() {
+  void testTooManyInputs() {
     assertThrows(IllegalArgumentException.class, () -> new Table(1, List.of("one", "two")));
   }
 
   @Test
-  public void testTooManyRowsWanted() {
+  void testTooManyRowsWanted() {
     assertThrows(IllegalArgumentException.class, () -> new Table(1, List.of()));
   }
 
