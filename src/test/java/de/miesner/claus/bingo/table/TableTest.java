@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TableTest {
@@ -25,7 +24,7 @@ class TableTest {
   @Test
   void testZeroInputsCreateRow() {
     this.table = new Table(0, List.of());
-    assertThat(table.createRows(), is(new Row[0]));
+    assertThat(table.createRows()).isEqualTo(new Row[0]);
   }
 
   @Test
@@ -36,7 +35,7 @@ class TableTest {
             new Row(List.of("seven", "eight", "nine"))
     };
 
-    assertThat(table.createRows(), is(expected));
+    assertThat(table.createRows()).isEqualTo(expected);
   }
 
   @Test

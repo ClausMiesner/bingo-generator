@@ -58,7 +58,7 @@ public class Table {
               .append(TABLE_ROW_BREAK);
     }
     int indexLastRowBreak = stringBuilder.lastIndexOf(TABLE_ROW_BREAK);
-    stringBuilder.delete(indexLastRowBreak, indexLastRowBreak + 1);
+    stringBuilder.delete(indexLastRowBreak, indexLastRowBreak + TABLE_ROW_BREAK.length());
     stringBuilder.append(TABLE_END);
 
     return stringBuilder.toString();
