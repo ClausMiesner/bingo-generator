@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.miesner.claus.bingo.util.latex.LatexExpression.CENTER_ALIGN;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SEPARATOR;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPECIFICATION_OFFSET;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
@@ -18,7 +20,7 @@ public class Table {
   private final List<String> inputs;
   private final Row[] rows;
   private char textAlignment = CENTER_ALIGN;
-  private boolean hasLineSeparators = true;
+  private boolean hasColumnSeparators = true;
 
   public Table(int numberOfRows, List<String> inputs) {
     this.numberOfRows = numberOfRows;
@@ -50,17 +52,27 @@ public class Table {
 
   @Override
   public String toString() {
+    if (numberOfRows == 0) {
+      return "";
+    }
     StringBuilder stringBuilder = new StringBuilder();
 
-    stringBuilder.append(TABLE_START)
+    stringBuilder
+            .append(TABLE_START)
             .insert(TABLE_COLUMN_SPECIFICATION_OFFSET, createColumnLayout());
+    stringBuilder
+            .append(LINE_BREAK)
+            .append(TABLE_ROW_SEPARATOR)
+            .append(LINE_BREAK);
     for (int i = 0; i < numberOfRows; i++) {
-      stringBuilder.append(rows[i].toString())
+      stringBuilder
+              .append(rows[i].toString())
+              .append(LINE_BREAK)
               .append(TABLE_ROW_BREAK)
-              .append(TABLE_ROW_SEPARATOR);
+              .append(LINE_BREAK)
+              .append(TABLE_ROW_SEPARATOR)
+              .append(LINE_BREAK);
     }
-    int indexLastRowBreak = stringBuilder.lastIndexOf(TABLE_ROW_BREAK);
-    stringBuilder.delete(indexLastRowBreak, indexLastRowBreak + TABLE_ROW_BREAK.length());
     stringBuilder.append(TABLE_END);
 
     return stringBuilder.toString();
@@ -68,21 +80,18 @@ public class Table {
 
   private String createColumnLayout() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(TABLE_ROW_BREAK);
+    stringBuilder.append(TABLE_COLUMN_SEPARATOR);
     for (int i = 0; i < numberOfRows; i++) {
       stringBuilder.append(textAlignment);
-      if (hasLineSeparators) {
-        stringBuilder.append(TABLE_ROW_BREAK);
+      if (hasColumnSeparators) {
+        stringBuilder.append(TABLE_COLUMN_SEPARATOR);
       }
-    }
-    if (!hasLineSeparators) {
-      stringBuilder.append(TABLE_ROW_BREAK);
     }
     return stringBuilder.toString();
   }
 
-  public void setHasLineSeparators(boolean hasLineSeparators) {
-    this.hasLineSeparators = hasLineSeparators;
+  public void setHasColumnSeparators(boolean hasColumnSeparators) {
+    this.hasColumnSeparators = hasColumnSeparators;
   }
 
   public void setTextAlignment(char textAlignment) {
