@@ -52,24 +52,6 @@ public static final String TABLE_END = "\\end{tabular}\n" +
                                         "\\end{table}";
   /**
    * <p>
-   *   Specifies the text alignment to the left.
-   * </p>
-   */
-public static final char LEFT_ALIGN = 'l';
-  /**
-   * <p>
-   *   Specifies the text alignment to the right.
-   * </p>
-   */
-public static final char RIGHT_ALIGN = 'r';
-  /**
-   * <p>
-   *   Specifies the text alignment to center.
-   * </p>
-   */
-public static final char CENTER_ALIGN = 'c';
-  /**
-   * <p>
    *   Adds a line break in source code.
    * </p>
    */

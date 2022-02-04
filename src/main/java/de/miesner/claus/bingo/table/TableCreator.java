@@ -1,17 +1,20 @@
 package de.miesner.claus.bingo.table;
 
 
+import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.CENTER_ALIGN;
+import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
+
 
 public class TableCreator {
 
   private final int requiredTables;
   private final TermRandomizer termRandomizer;
   private final int rowsPerTable;
-  private char textAlignment = CENTER_ALIGN;
+  private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparator = false;
 
   public TableCreator(List<String> possibleBingoTerms, int rowsPerTable, int requiredTables) {
@@ -20,7 +23,7 @@ public class TableCreator {
     this.rowsPerTable = rowsPerTable;
   }
 
-  public TableCreator withTextAlignment(char alignmentOption) {
+  public TableCreator withTextAlignment(LatexTextAlignment alignmentOption) {
     this.textAlignment = alignmentOption;
     return this;
   }
@@ -42,9 +45,7 @@ public class TableCreator {
           termsForTable.add(termRandomizer.getNextTerm());
         }
       }
-      // We need to use a constructor with more parameters to pass all values over.
-      // We can also make table package private. It should only be instantiated via this
-      tables.add(new Table(rowsPerTable, termsForTable));
+      tables.add(new Table(rowsPerTable, termsForTable, textAlignment, hasColumnSeparator));
       termRandomizer.reset();
     }
     return tables;
