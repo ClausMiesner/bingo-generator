@@ -23,15 +23,13 @@ public class Table {
   private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparators = true;
 
-  public Table(int numberOfRows, List<String> inputs, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
+  Table(int numberOfRows, List<String> inputs, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
     this(numberOfRows, inputs);
     this.textAlignment = textAlignment;
     this.hasColumnSeparators = hasColumnSeparators;
   }
 
-  @VisibleForTesting
-  // Actually, this constructor should be private. We don't really need it for testing
-  Table(int numberOfRows, List<String> inputs) {
+  private Table(int numberOfRows, List<String> inputs) {
     this.numberOfRows = numberOfRows;
     this.inputs = inputs;
     if (!numberOfRowsMatchInputs()) {
@@ -40,6 +38,10 @@ public class Table {
     } else {
       this.rows = createRows();
     }
+  }
+
+  public static TableBuilder builder() {
+    return new TableBuilder();
   }
 
   private boolean numberOfRowsMatchInputs() {
@@ -89,13 +91,20 @@ public class Table {
 
   private String createColumnLayout() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(TABLE_COLUMN_SEPARATOR);
+    appendColumnSeparatorOrSpace(stringBuilder);
     for (int i = 0; i < numberOfRows; i++) {
       stringBuilder.append(textAlignment.getAlignment());
-      if (hasColumnSeparators) {
-        stringBuilder.append(TABLE_COLUMN_SEPARATOR);
-      }
+      appendColumnSeparatorOrSpace(stringBuilder);
     }
     return stringBuilder.toString();
   }
+
+  private void appendColumnSeparatorOrSpace(StringBuilder stringBuilder) {
+    if (hasColumnSeparators) {
+      stringBuilder.append(TABLE_COLUMN_SEPARATOR);
+    } else {
+      stringBuilder.append(" ");
+    }
+  }
+
 }
