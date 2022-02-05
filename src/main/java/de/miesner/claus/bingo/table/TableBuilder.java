@@ -8,7 +8,7 @@ import java.util.List;
 
 import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
-public class TableBuilder {
+class TableBuilder {
 
   private ITermRandomizer termRandomizer;
   private int numberOfRows;
