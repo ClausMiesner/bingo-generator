@@ -13,39 +13,25 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
-import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
 public class Table {
 
   private final int numberOfRows;
   private final List<String> words;
   private final Row[] rows;
-  private LatexTextAlignment textAlignment = CENTER_ALIGN;
-  private boolean hasColumnSeparators = true;
+  private final LatexTextAlignment textAlignment;
+  private final boolean hasColumnSeparators;
 
   Table(int numberOfRows, List<String> words, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
-    this(numberOfRows, words);
+    this.numberOfRows = numberOfRows;
+    this.words = words;
+    this.rows = createRows();
     this.textAlignment = textAlignment;
     this.hasColumnSeparators = hasColumnSeparators;
   }
 
-  private Table(int numberOfRows, List<String> words) {
-    this.numberOfRows = numberOfRows;
-    this.words = words;
-    if (!numberOfRowsMatchWords()) {
-      throw new IllegalArgumentException("Number of words does not match number of rows." +
-              " The number of words must be the square of the number of rows.");
-    } else {
-      this.rows = createRows();
-    }
-  }
-
   public static TableBuilder builder() {
     return new TableBuilder();
-  }
-
-  private boolean numberOfRowsMatchWords() {
-    return this.numberOfRows == Math.sqrt(this.words.size());
   }
 
   @VisibleForTesting
