@@ -49,9 +49,6 @@ public class Table {
 
   @Override
   public String toString() {
-    if (numberOfRows == 0) {
-      return "";
-    }
     StringBuilder stringBuilder = new StringBuilder();
 
     stringBuilder

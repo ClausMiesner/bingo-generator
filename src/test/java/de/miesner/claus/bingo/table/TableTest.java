@@ -10,6 +10,7 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
+import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.LEFT_ALIGN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -129,6 +130,36 @@ class TableTest {
 
     String expected = "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{ c c c }" + LINE_BREAK +
+            TABLE_ROW_SEPARATOR + LINE_BREAK +
+            "one & two & three" + LINE_BREAK +
+            TABLE_ROW_BREAK + LINE_BREAK +
+            TABLE_ROW_SEPARATOR + LINE_BREAK +
+            "four & five & six" + LINE_BREAK +
+            TABLE_ROW_BREAK + LINE_BREAK +
+            TABLE_ROW_SEPARATOR + LINE_BREAK +
+            "seven & eight & nine" + LINE_BREAK +
+            TABLE_ROW_BREAK + LINE_BREAK +
+            TABLE_ROW_SEPARATOR + LINE_BREAK +
+            TABLE_END;
+    assertThat(table.toString()).isEqualTo(expected);
+  }
+
+  @Test
+  void testToStringWithLeftAlignAndSeparator() {
+    var words = List.of(
+            "one", "two", "three",
+            "four", "five", "six",
+            "seven", "eight", "nine"
+    );
+    this.table = Table.builder()
+            .withPossibleBingoTerms(words)
+            .withNumberOfRows(3)
+            .withTermRandomizer(new PassThroughTermRandomizer(words))
+            .withTextAlignment(LEFT_ALIGN)
+            .withColumnSeparator(true)
+            .build();
+    String expected = "\\begin{table}" + LINE_BREAK +
+            "\\begin{tabular}{|l|l|l|}" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one & two & three" + LINE_BREAK +
             TABLE_ROW_BREAK + LINE_BREAK +
