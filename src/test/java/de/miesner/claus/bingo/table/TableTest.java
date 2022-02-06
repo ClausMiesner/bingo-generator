@@ -25,7 +25,7 @@ class TableTest {
   void setup() {
     this.table = Table.builder()
             .withPossibleBingoTerms(sampleInputs)
-            .withRowsPerTable((int) Math.sqrt(sampleInputs.size()))
+            .withNumberOfRows((int) Math.sqrt(sampleInputs.size()))
             .withTermRandomizer(new PassThroughTermRandomizer(sampleInputs))
             .build();
   }
@@ -33,12 +33,12 @@ class TableTest {
   @Test
   void testTooFewInformationRows() {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(0)
+            .withNumberOfRows(0)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(new TermRandomizer())
             .build(), "No rows requested.");
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(-1)
+            .withNumberOfRows(-1)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(new TermRandomizer())
             .build(), "Negative number of rows requested.");
@@ -47,12 +47,12 @@ class TableTest {
   @Test
   void testTooFewInformationTerms() {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withPossibleBingoTerms(null)
             .withTermRandomizer(new TermRandomizer())
             .build(), "Terms are null.");
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
             .withTermRandomizer(new PassThroughTermRandomizer(List.of()))
             .build(), "Too few terms.");
@@ -61,7 +61,7 @@ class TableTest {
   @Test
   void testTooFewInformationTermRandomizer() {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(null)
             .build(), "Term randomizer is null.");
@@ -83,7 +83,7 @@ class TableTest {
     List<String> terms = List.of("one", "two");
     this.table = Table.builder()
             .withPossibleBingoTerms(terms)
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withTermRandomizer(new PassThroughTermRandomizer(terms))
             .build();
     String expected = "\\begin{table}" + LINE_BREAK +
@@ -100,7 +100,7 @@ class TableTest {
   @Test
   void testTooManyRowsWanted() {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
             .withTermRandomizer(new PassThroughTermRandomizer(List.of()))
             .build());
@@ -110,7 +110,7 @@ class TableTest {
   void testToStringWithOneEntry() {
     this.table = Table.builder()
             .withPossibleBingoTerms(List.of("one"))
-            .withRowsPerTable(1)
+            .withNumberOfRows(1)
             .withTermRandomizer(new PassThroughTermRandomizer(List.of("one")))
             .build();
 
