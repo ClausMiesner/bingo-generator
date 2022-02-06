@@ -1,6 +1,6 @@
 package de.miesner.claus.bingo.table;
 
-import de.miesner.claus.bingo.random.TermRandomizer;
+import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,12 +35,12 @@ class TableTest {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(0)
             .withPossibleBingoTerms(List.of("one"))
-            .withTermRandomizer(new TermRandomizer())
+            .withTermRandomizer(new BasicTermRandomizer())
             .build(), "No rows requested.");
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(-1)
             .withPossibleBingoTerms(List.of("one"))
-            .withTermRandomizer(new TermRandomizer())
+            .withTermRandomizer(new BasicTermRandomizer())
             .build(), "Negative number of rows requested.");
   }
 
@@ -49,7 +49,7 @@ class TableTest {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(null)
-            .withTermRandomizer(new TermRandomizer())
+            .withTermRandomizer(new BasicTermRandomizer())
             .build(), "Terms are null.");
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(1)
