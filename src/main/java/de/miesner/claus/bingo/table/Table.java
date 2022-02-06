@@ -13,50 +13,36 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
-import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
 public class Table {
 
   private final int numberOfRows;
-  private final List<String> inputs;
+  private final List<String> words;
   private final Row[] rows;
-  private LatexTextAlignment textAlignment = CENTER_ALIGN;
-  private boolean hasColumnSeparators = true;
+  private final LatexTextAlignment textAlignment;
+  private final boolean hasColumnSeparators;
 
-  Table(int numberOfRows, List<String> inputs, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
-    this(numberOfRows, inputs);
+  Table(int numberOfRows, List<String> words, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
+    this.numberOfRows = numberOfRows;
+    this.words = words;
+    this.rows = createRows();
     this.textAlignment = textAlignment;
     this.hasColumnSeparators = hasColumnSeparators;
-  }
-
-  private Table(int numberOfRows, List<String> inputs) {
-    this.numberOfRows = numberOfRows;
-    this.inputs = inputs;
-    if (!numberOfRowsMatchInputs()) {
-      throw new IllegalArgumentException("Number of inputs does not match number of rows." +
-              " The number of inputs must be the square of the number of rows.");
-    } else {
-      this.rows = createRows();
-    }
   }
 
   public static TableBuilder builder() {
     return new TableBuilder();
   }
 
-  private boolean numberOfRowsMatchInputs() {
-    return this.numberOfRows == Math.sqrt(this.inputs.size());
-  }
-
   @VisibleForTesting
   Row[] createRows() {
     Row[] result = new Row[numberOfRows];
     for (int i = 0; i < numberOfRows; i++) {
-      List<String> partialInputs = new ArrayList<>(numberOfRows);
+      List<String> wordsForRow = new ArrayList<>(numberOfRows);
       for (int j = numberOfRows * i; j < (i + 1) * numberOfRows; j++) {
-        partialInputs.add(this.inputs.get(j));
+        wordsForRow.add(this.words.get(j));
       }
-      result[i] = new Row(partialInputs);
+      result[i] = new Row(wordsForRow);
     }
     return result;
   }
