@@ -1,2 +1,2 @@
 # bingo-generator
-Create Bingo games from a list of inputs
+Create Bingo games from a list of strings

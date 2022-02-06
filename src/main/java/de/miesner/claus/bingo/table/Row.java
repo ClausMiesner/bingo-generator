@@ -6,17 +6,17 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_ENTRY_
 
 public class Row {
 
-  private final List<String> inputs;
+  private final List<String> words;
 
-  public Row(List<String> inputs) {
-    this.inputs = inputs;
+  public Row(List<String> words) {
+    this.words = words;
   }
 
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    for (String input : inputs) {
-      stringBuilder.append(input)
+    for (String word : words) {
+      stringBuilder.append(word)
               .append(TABLE_ROW_ENTRY_CONNECTOR);
     }
     int lastIndex = stringBuilder.lastIndexOf(TABLE_ROW_ENTRY_CONNECTOR);
@@ -33,6 +33,6 @@ public class Row {
     }
     Row that = (Row) o;
 
-    return this.inputs.equals(that.inputs);
+    return this.words.equals(that.words);
   }
 }

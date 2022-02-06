@@ -18,23 +18,23 @@ import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 public class Table {
 
   private final int numberOfRows;
-  private final List<String> inputs;
+  private final List<String> words;
   private final Row[] rows;
   private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparators = true;
 
-  Table(int numberOfRows, List<String> inputs, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
-    this(numberOfRows, inputs);
+  Table(int numberOfRows, List<String> words, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
+    this(numberOfRows, words);
     this.textAlignment = textAlignment;
     this.hasColumnSeparators = hasColumnSeparators;
   }
 
-  private Table(int numberOfRows, List<String> inputs) {
+  private Table(int numberOfRows, List<String> words) {
     this.numberOfRows = numberOfRows;
-    this.inputs = inputs;
-    if (!numberOfRowsMatchInputs()) {
-      throw new IllegalArgumentException("Number of inputs does not match number of rows." +
-              " The number of inputs must be the square of the number of rows.");
+    this.words = words;
+    if (!numberOfRowsMatchWords()) {
+      throw new IllegalArgumentException("Number of words does not match number of rows." +
+              " The number of words must be the square of the number of rows.");
     } else {
       this.rows = createRows();
     }
@@ -44,19 +44,19 @@ public class Table {
     return new TableBuilder();
   }
 
-  private boolean numberOfRowsMatchInputs() {
-    return this.numberOfRows == Math.sqrt(this.inputs.size());
+  private boolean numberOfRowsMatchWords() {
+    return this.numberOfRows == Math.sqrt(this.words.size());
   }
 
   @VisibleForTesting
   Row[] createRows() {
     Row[] result = new Row[numberOfRows];
     for (int i = 0; i < numberOfRows; i++) {
-      List<String> partialInputs = new ArrayList<>(numberOfRows);
+      List<String> wordsForRow = new ArrayList<>(numberOfRows);
       for (int j = numberOfRows * i; j < (i + 1) * numberOfRows; j++) {
-        partialInputs.add(this.inputs.get(j));
+        wordsForRow.add(this.words.get(j));
       }
-      result[i] = new Row(partialInputs);
+      result[i] = new Row(wordsForRow);
     }
     return result;
   }

@@ -11,7 +11,7 @@ class RowTest {
   Row row;
 
   @Test
-  void testToStringWithoutInputs() {
+  void testToStringWithoutWords() {
     this.row = new Row(List.of());
 
     String expected = "";

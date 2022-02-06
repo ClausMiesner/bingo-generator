@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TableTest {
   Table table;
-  List<String> sampleInputs = List.of(
+  List<String> sampleWords = List.of(
           "one", "two", "three",
           "four", "five", "six",
           "seven", "eight", "nine"
@@ -24,9 +24,9 @@ class TableTest {
   @BeforeEach
   void setup() {
     this.table = Table.builder()
-            .withPossibleBingoTerms(sampleInputs)
-            .withNumberOfRows((int) Math.sqrt(sampleInputs.size()))
-            .withTermRandomizer(new PassThroughTermRandomizer(sampleInputs))
+            .withPossibleBingoTerms(sampleWords)
+            .withNumberOfRows((int) Math.sqrt(sampleWords.size()))
+            .withTermRandomizer(new PassThroughTermRandomizer(sampleWords))
             .build();
   }
 
@@ -68,7 +68,7 @@ class TableTest {
   }
 
   @Test
-  void testCorrectInputs() {
+  void testCorrectWords() {
     Row[] expected = {
             new Row(List.of("one", "two", "three")),
             new Row(List.of("four", "five", "six")),
@@ -79,7 +79,7 @@ class TableTest {
   }
 
   @Test
-  void testMoreInputsThanRequired() {
+  void testMoreWordsThanRequired() {
     List<String> terms = List.of("one", "two");
     this.table = Table.builder()
             .withPossibleBingoTerms(terms)
