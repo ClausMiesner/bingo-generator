@@ -1,5 +1,6 @@
 package de.miesner.claus.bingo.table;
 
+import com.google.common.annotations.VisibleForTesting;
 import de.miesner.claus.bingo.random.ITermRandomizer;
 import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
@@ -136,11 +137,16 @@ class TableBuilder {
     }
   }
 
-  private boolean rowRequirementTermsMismatch() {
+  @VisibleForTesting
+  boolean rowRequirementTermsMismatch() {
     if (maxOccurrencesForTerm == 1) {
-      return numberOfRows > Math.sqrt(possibleBingoTerms.size());
+      return square(numberOfRows) > possibleBingoTerms.size();
     }
-    return numberOfRows > Math.sqrt(possibleBingoTerms.size()) * maxOccurrencesForTerm;
+    return square(numberOfRows) > possibleBingoTerms.size() * maxOccurrencesForTerm;
+  }
+
+  private double square(int number) {
+    return Math.pow(number, 2);
   }
 
   private boolean requiredValueMissing() {

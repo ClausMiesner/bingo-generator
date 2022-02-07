@@ -173,4 +173,52 @@ class TableTest {
             TABLE_END;
     assertThat(table.toString()).isEqualTo(expected);
   }
+
+  @Test
+  void testRowRequirementsSquareNumbers() {
+    TableBuilder tableBuilder = Table.builder()
+            .withNumberOfRows(3) // 9 Terms required
+            .withPossibleBingoTerms(List.of("one", "two", "three"))
+            .withDoubledTerms(3); // 3 * 3 = 9 == 9
+
+    assertThat(tableBuilder.rowRequirementTermsMismatch()).isFalse();
+  }
+
+  @Test
+  void testRowRequirementsNonSquareNumbers() {
+    TableBuilder tableBuilder = Table.builder()
+            .withNumberOfRows(3) // 9 Terms required
+            .withPossibleBingoTerms(List.of("one", "two", "three", "four", "five"))
+            .withDoubledTerms(2); // 2 * 5 = 10 > 9
+
+    assertThat(tableBuilder.rowRequirementTermsMismatch()).isFalse();
+  }
+
+  @Test
+  void testRowRequirementsMismatch() {
+    TableBuilder tableBuilder = Table.builder()
+            .withNumberOfRows(3) // 9 Terms required
+            .withPossibleBingoTerms(List.of("one", "two", "three", "four"))
+            .withDoubledTerms(2); // 2 * 4 = 8 < 9
+
+    assertThat(tableBuilder.rowRequirementTermsMismatch()).isTrue();
+  }
+
+  @Test
+  void testRowRequirementsMismatchNoDoubledTerms() {
+    TableBuilder tableBuilder = Table.builder()
+            .withNumberOfRows(3) // 9 Terms required
+            .withPossibleBingoTerms(List.of("one", "two", "three", "four"));
+
+    assertThat(tableBuilder.rowRequirementTermsMismatch()).isTrue();
+  }
+
+  @Test
+  void testRowRequirementsNoDoubledTerms() {
+    TableBuilder tableBuilder = Table.builder()
+            .withNumberOfRows(2) // 4 Terms required
+            .withPossibleBingoTerms(List.of("one", "two", "three", "four"));
+
+    assertThat(tableBuilder.rowRequirementTermsMismatch()).isFalse();
+  }
 }
