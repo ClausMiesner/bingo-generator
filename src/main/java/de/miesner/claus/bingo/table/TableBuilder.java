@@ -15,6 +15,7 @@ class TableBuilder {
   private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparator = false;
   private List<String> possibleBingoTerms;
+  private int maxOccurrencesForTerm = 1;
 
   /**
    * <p>
@@ -91,6 +92,11 @@ class TableBuilder {
     return this;
   }
 
+  public TableBuilder withDoubledTerms(int maxOccurrencesForTerm) {
+    this.maxOccurrencesForTerm = maxOccurrencesForTerm;
+    return this;
+  }
+
   /**
    * <p>
    * Creates the {@link Table} object with all set or default specifications.
@@ -122,13 +128,19 @@ class TableBuilder {
                       "supply a matching list of possible terms. " +
                       "Also make sure to provide a term randomizer.");
     }
+    if (maxOccurrencesForTerm < 1) {
+      this.maxOccurrencesForTerm = 1;
+    }
     if (rowRequirementTermsMismatch()) {
       throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");
     }
   }
 
   private boolean rowRequirementTermsMismatch() {
-    return numberOfRows > Math.sqrt(possibleBingoTerms.size());
+    if (maxOccurrencesForTerm == 1) {
+      return numberOfRows > Math.sqrt(possibleBingoTerms.size());
+    }
+    return numberOfRows > Math.sqrt(possibleBingoTerms.size()) * maxOccurrencesForTerm;
   }
 
   private boolean requiredValueMissing() {
