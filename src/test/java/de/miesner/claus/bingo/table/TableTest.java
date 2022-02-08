@@ -179,7 +179,7 @@ class TableTest {
     TableBuilder tableBuilder = Table.builder()
             .withNumberOfRows(3) // 9 Terms required
             .withPossibleBingoTerms(List.of("one", "two", "three"))
-            .withDoubledTerms(3); // 3 * 3 = 9 == 9
+            .withMaxOccurrencesForTerm(3); // 3 * 3 = 9 == 9
 
     assertThat(tableBuilder.rowRequirementTermsMismatch()).isFalse();
   }
@@ -189,7 +189,7 @@ class TableTest {
     TableBuilder tableBuilder = Table.builder()
             .withNumberOfRows(3) // 9 Terms required
             .withPossibleBingoTerms(List.of("one", "two", "three", "four", "five"))
-            .withDoubledTerms(2); // 2 * 5 = 10 > 9
+            .withMaxOccurrencesForTerm(2); // 2 * 5 = 10 > 9
 
     assertThat(tableBuilder.rowRequirementTermsMismatch()).isFalse();
   }
@@ -199,7 +199,7 @@ class TableTest {
     TableBuilder tableBuilder = Table.builder()
             .withNumberOfRows(3) // 9 Terms required
             .withPossibleBingoTerms(List.of("one", "two", "three", "four"))
-            .withDoubledTerms(2); // 2 * 4 = 8 < 9
+            .withMaxOccurrencesForTerm(2); // 2 * 4 = 8 < 9
 
     assertThat(tableBuilder.rowRequirementTermsMismatch()).isTrue();
   }

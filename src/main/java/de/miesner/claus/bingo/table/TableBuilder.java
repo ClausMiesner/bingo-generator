@@ -93,7 +93,7 @@ class TableBuilder {
     return this;
   }
 
-  public TableBuilder withDoubledTerms(int maxOccurrencesForTerm) {
+  public TableBuilder withMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
     this.maxOccurrencesForTerm = maxOccurrencesForTerm;
     return this;
   }
@@ -110,7 +110,6 @@ class TableBuilder {
     int fieldsPerRow = numberOfRows;
 
     List<String> termsForTable = new ArrayList<>(numberOfRows * fieldsPerRow);
-    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
     addTermsRandomly(fieldsPerRow, termsForTable);
     return new Table(numberOfRows, termsForTable, textAlignment, hasColumnSeparator);
   }
@@ -130,9 +129,12 @@ class TableBuilder {
                       "supply a matching list of possible terms. " +
                       "Also make sure to provide a term randomizer.");
     }
+
     if (maxOccurrencesForTerm < 1) {
       this.maxOccurrencesForTerm = 1;
     }
+    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
+
     if (rowRequirementTermsMismatch()) {
       throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");
     }

@@ -22,6 +22,7 @@ class BasicTermRandomizerTest {
     this.termRandomizer = new BasicTermRandomizer();
     this.randomMock = mock(Random.class);
     this.termRandomizer.setRandomForTesting(randomMock);
+    this.termRandomizer.setMaxOccurrencesForTerm(1);
   }
 
   @Test

@@ -2,16 +2,17 @@ package de.miesner.claus.bingo.random;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 public class BasicTermRandomizer implements TermRandomizer {
   private List<String> terms;
-  private final Set<String> usedTerms = new HashSet<>();
+  private final Map<String, Integer> usedTerms = new HashMap<>();
   private Random random = new Random();
   private int highestIndex;
+  private int maxOccurrencesForTerm;
 
   @Override
   public void setup(List<String> possibleTerms) {
@@ -29,15 +30,39 @@ public class BasicTermRandomizer implements TermRandomizer {
     if (terms == null) {
       throw new IllegalStateException("No valid setup was run. No possibleTerms setup.");
     }
+
     int exclusiveUpperBound = highestIndex + 1;
-    int nextIndex = random.nextInt(exclusiveUpperBound);
-    String nextTerm = terms.get(nextIndex);
-    while (usedTerms.contains(nextTerm)) {
-      nextIndex = random.nextInt(exclusiveUpperBound);
+
+    String nextTerm;
+    do {
+      int nextIndex = random.nextInt(exclusiveUpperBound);
       nextTerm = terms.get(nextIndex);
-    }
-    usedTerms.add(nextTerm);
+    } while (isNotAvailableForAnotherOccurrence(nextTerm));
+
+    addNextTermToUsedOrIncreaseOccurrences(nextTerm);
     return nextTerm;
+  }
+
+  private boolean isNotAvailableForAnotherOccurrence(String nextTerm) {
+    int currentOccurrences = usedTerms.getOrDefault(nextTerm, 0);
+    return currentOccurrences >= maxOccurrencesForTerm;
+  }
+
+  private void addNextTermToUsedOrIncreaseOccurrences(String nextTerm) {
+    if (usedTerms.containsKey(nextTerm)) {
+      increaseOccurrences(nextTerm);
+      return;
+    }
+    addTermToUsed(nextTerm);
+  }
+
+  private void increaseOccurrences(String nextTerm) {
+    int currentOccurrences = usedTerms.get(nextTerm);
+    usedTerms.replace(nextTerm, currentOccurrences + 1);
+  }
+
+  private void addTermToUsed(String nextTerm) {
+    usedTerms.put(nextTerm, 1);
   }
 
   @Override
@@ -47,7 +72,7 @@ public class BasicTermRandomizer implements TermRandomizer {
 
   @Override
   public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
-    // to be implemented
+    this.maxOccurrencesForTerm = maxOccurrencesForTerm;
   }
 
   @VisibleForTesting
