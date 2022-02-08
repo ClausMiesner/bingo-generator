@@ -140,6 +140,10 @@ class TableBuilder {
     }
   }
 
+  private boolean requiredValueMissing() {
+    return possibleBingoTerms == null || numberOfRows <= 0 || termRandomizer == null;
+  }
+
   @VisibleForTesting
   boolean rowRequirementTermsMismatch() {
     if (maxOccurrencesForTerm == 1) {
@@ -150,9 +154,5 @@ class TableBuilder {
 
   private double square(int number) {
     return Math.pow(number, 2);
-  }
-
-  private boolean requiredValueMissing() {
-    return possibleBingoTerms == null || numberOfRows <= 0 || termRandomizer == null;
   }
 }
