@@ -1,6 +1,7 @@
 package de.miesner.claus.bingo.table;
 
-import de.miesner.claus.bingo.random.ITermRandomizer;
+import com.google.common.annotations.VisibleForTesting;
+import de.miesner.claus.bingo.random.TermRandomizer;
 import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
 import java.util.ArrayList;
@@ -10,22 +11,23 @@ import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
 class TableBuilder {
 
-  private ITermRandomizer termRandomizer;
+  private TermRandomizer termRandomizer;
   private int numberOfRows;
   private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparator = false;
   private List<String> possibleBingoTerms;
+  private int maxOccurrencesForTerm = 1;
 
   /**
    * <p>
    * Required.
-   * Adds a {@link ITermRandomizer} for choosing random words.
+   * Adds a {@link TermRandomizer} for choosing random words.
    * </p>
    *
    * @param termRandomizer to choose random terms for a table
    * @return the table builder object
    */
-  public TableBuilder withTermRandomizer(ITermRandomizer termRandomizer) {
+  public TableBuilder withTermRandomizer(TermRandomizer termRandomizer) {
     this.termRandomizer = termRandomizer;
     return this;
   }
@@ -34,7 +36,7 @@ class TableBuilder {
    * <p>
    * Required.
    * Adds a list holding all possible bingo terms.
-   * Actual terms of the table will be chosen by a {@link ITermRandomizer} (see {@link #withTermRandomizer(ITermRandomizer)}).
+   * Actual terms of the table will be chosen by a {@link TermRandomizer} (see {@link #withTermRandomizer(TermRandomizer)}).
    * </p>
    *
    * @param possibleBingoTerms list holding all possible terms
@@ -91,6 +93,11 @@ class TableBuilder {
     return this;
   }
 
+  public TableBuilder withMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
+    this.maxOccurrencesForTerm = maxOccurrencesForTerm;
+    return this;
+  }
+
   /**
    * <p>
    * Creates the {@link Table} object with all set or default specifications.
@@ -122,16 +129,30 @@ class TableBuilder {
                       "supply a matching list of possible terms. " +
                       "Also make sure to provide a term randomizer.");
     }
+
+    if (maxOccurrencesForTerm < 1) {
+      this.maxOccurrencesForTerm = 1;
+    }
+    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
+
     if (rowRequirementTermsMismatch()) {
       throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");
     }
   }
 
-  private boolean rowRequirementTermsMismatch() {
-    return numberOfRows > Math.sqrt(possibleBingoTerms.size());
-  }
-
   private boolean requiredValueMissing() {
     return possibleBingoTerms == null || numberOfRows <= 0 || termRandomizer == null;
+  }
+
+  @VisibleForTesting
+  boolean rowRequirementTermsMismatch() {
+    if (maxOccurrencesForTerm == 1) {
+      return square(numberOfRows) > possibleBingoTerms.size();
+    }
+    return square(numberOfRows) > possibleBingoTerms.size() * maxOccurrencesForTerm;
+  }
+
+  private double square(int number) {
+    return Math.pow(number, 2);
   }
 }

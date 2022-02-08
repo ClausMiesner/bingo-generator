@@ -2,7 +2,7 @@ package de.miesner.claus.bingo.random;
 
 import java.util.List;
 
-public interface ITermRandomizer {
+public interface TermRandomizer {
 
   /**
    * <p>
@@ -26,4 +26,6 @@ public interface ITermRandomizer {
    * </p>
    */
   void reset();
+
+  void setMaxOccurrencesForTerm(int maxOccurrencesForTerm);
 }

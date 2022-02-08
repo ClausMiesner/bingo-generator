@@ -1,11 +1,11 @@
 package de.miesner.claus.bingo.table;
 
-import de.miesner.claus.bingo.random.ITermRandomizer;
+import de.miesner.claus.bingo.random.TermRandomizer;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PassThroughTermRandomizer implements ITermRandomizer {
+public class PassThroughTermRandomizer implements TermRandomizer {
 
   private List<String> terms;
   private int maxIndex;
@@ -37,5 +37,10 @@ public class PassThroughTermRandomizer implements ITermRandomizer {
 
   @Override
   public void reset() {
+  }
+
+  @Override
+  public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
+    // to be implemented
   }
 }
