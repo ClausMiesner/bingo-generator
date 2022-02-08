@@ -67,4 +67,15 @@ class BasicTermRandomizerTest {
     assertThat(termRandomizer.getNextTerm()).as("Call after reset").isEqualTo("one");
   }
 
+  @Test
+  void testNextTermDoubleValueAllowed() {
+    termRandomizer.setMaxOccurrencesForTerm(2);
+    when(randomMock.nextInt(2)).thenReturn(0, 0, 0, 1);
+    termRandomizer.setup(List.of("one", "two"));
+
+    assertThat(termRandomizer.getNextTerm()).as("First occurrence of term allowed.").isEqualTo("one");
+    assertThat(termRandomizer.getNextTerm()).as("Second occurrence of term allowed.").isEqualTo("one");
+    assertThat(termRandomizer.getNextTerm()).as("Third occurrence of term not allowed.").isEqualTo("two");
+  }
+
 }
