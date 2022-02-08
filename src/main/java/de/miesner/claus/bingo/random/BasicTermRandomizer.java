@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class BasicTermRandomizer implements ITermRandomizer {
+public class BasicTermRandomizer implements TermRandomizer {
   private List<String> terms;
   private final Set<String> usedTerms = new HashSet<>();
   private Random random = new Random();

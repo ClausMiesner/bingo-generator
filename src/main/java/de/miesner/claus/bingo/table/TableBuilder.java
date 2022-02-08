@@ -1,7 +1,7 @@
 package de.miesner.claus.bingo.table;
 
 import com.google.common.annotations.VisibleForTesting;
-import de.miesner.claus.bingo.random.ITermRandomizer;
+import de.miesner.claus.bingo.random.TermRandomizer;
 import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
 class TableBuilder {
 
-  private ITermRandomizer termRandomizer;
+  private TermRandomizer termRandomizer;
   private int numberOfRows;
   private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparator = false;
@@ -21,13 +21,13 @@ class TableBuilder {
   /**
    * <p>
    * Required.
-   * Adds a {@link ITermRandomizer} for choosing random words.
+   * Adds a {@link TermRandomizer} for choosing random words.
    * </p>
    *
    * @param termRandomizer to choose random terms for a table
    * @return the table builder object
    */
-  public TableBuilder withTermRandomizer(ITermRandomizer termRandomizer) {
+  public TableBuilder withTermRandomizer(TermRandomizer termRandomizer) {
     this.termRandomizer = termRandomizer;
     return this;
   }
@@ -36,7 +36,7 @@ class TableBuilder {
    * <p>
    * Required.
    * Adds a list holding all possible bingo terms.
-   * Actual terms of the table will be chosen by a {@link ITermRandomizer} (see {@link #withTermRandomizer(ITermRandomizer)}).
+   * Actual terms of the table will be chosen by a {@link TermRandomizer} (see {@link #withTermRandomizer(TermRandomizer)}).
    * </p>
    *
    * @param possibleBingoTerms list holding all possible terms
