@@ -38,4 +38,9 @@ public class PassThroughTermRandomizer implements TermRandomizer {
   @Override
   public void reset() {
   }
+
+  @Override
+  public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
+    // to be implemented
+  }
 }

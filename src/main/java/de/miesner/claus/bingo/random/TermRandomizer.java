@@ -26,4 +26,6 @@ public interface TermRandomizer {
    * </p>
    */
   void reset();
+
+  void setMaxOccurrencesForTerm(int maxOccurrencesForTerm);
 }

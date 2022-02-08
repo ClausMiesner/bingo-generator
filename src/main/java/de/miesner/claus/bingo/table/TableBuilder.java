@@ -110,6 +110,7 @@ class TableBuilder {
     int fieldsPerRow = numberOfRows;
 
     List<String> termsForTable = new ArrayList<>(numberOfRows * fieldsPerRow);
+    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
     addTermsRandomly(fieldsPerRow, termsForTable);
     return new Table(numberOfRows, termsForTable, textAlignment, hasColumnSeparator);
   }

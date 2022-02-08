@@ -45,6 +45,11 @@ public class BasicTermRandomizer implements TermRandomizer {
     usedTerms.clear();
   }
 
+  @Override
+  public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
+    // to be implemented
+  }
+
   @VisibleForTesting
   void setRandomForTesting(Random random) {
     this.random = random;
