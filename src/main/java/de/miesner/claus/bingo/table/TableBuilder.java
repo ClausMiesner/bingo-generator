@@ -107,11 +107,20 @@ public class TableBuilder {
    */
   public Table build() {
     checkFieldRequirements();
-    int fieldsPerRow = numberOfRows;
+    setupTermRandomizer();
 
+    int fieldsPerRow = numberOfRows;
     List<String> termsForTable = new ArrayList<>(numberOfRows * fieldsPerRow);
     addTermsRandomly(fieldsPerRow, termsForTable);
+
     return new Table(numberOfRows, termsForTable, textAlignment, hasColumnSeparator);
+  }
+
+  private void setupTermRandomizer() {
+    if (termRandomizer == null) {
+      throw new IllegalStateException("A term randomizer is required but wasn't provided.");
+    }
+    termRandomizer.setup(possibleBingoTerms, maxOccurrencesForTerm);
   }
 
   private void addTermsRandomly(int fieldsPerRow, List<String> termsForTable) {
