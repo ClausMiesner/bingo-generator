@@ -6,13 +6,14 @@ public interface TermRandomizer {
 
   /**
    * <p>
-   * This sets up the randomizer with the list of possible terms and prepares it
-   * for returning terms on {@link #getNextTerm()} calls.
+   * This sets up the randomizer with the list of possible terms and their max occurrences
+   * and prepares it for returning terms on {@link #getNextTerm()} calls.
    * </p>
    *
-   * @param possibleTerms List of possible terms
+   * @param possibleTerms         List of possible terms
+   * @param maxOccurrencesForTerm Max number a term may occur in the table
    */
-  void setup(List<String> possibleTerms);
+  void setup(List<String> possibleTerms, int maxOccurrencesForTerm);
 
   /**
    * @return the next random term
@@ -26,6 +27,4 @@ public interface TermRandomizer {
    * </p>
    */
   void reset();
-
-  void setMaxOccurrencesForTerm(int maxOccurrencesForTerm);
 }

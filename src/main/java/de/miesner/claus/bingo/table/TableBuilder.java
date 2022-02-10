@@ -133,7 +133,6 @@ public class TableBuilder {
     if (maxOccurrencesForTerm < 1) {
       this.maxOccurrencesForTerm = 1;
     }
-    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
 
     if (rowRequirementTermsMismatch()) {
       throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");

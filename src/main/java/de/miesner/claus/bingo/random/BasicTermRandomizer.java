@@ -15,14 +15,23 @@ public class BasicTermRandomizer implements TermRandomizer {
   private int maxOccurrencesForTerm;
 
   @Override
-  public void setup(List<String> possibleTerms) {
+  public void setup(List<String> possibleTerms, int maxOccurrencesForTerm) {
     if (possibleTerms == null || possibleTerms.isEmpty()) {
       throw new IllegalArgumentException("There need to be possible terms in order to setup the "
               + getClass().getSimpleName() + ".");
     }
     this.terms = possibleTerms;
     this.highestIndex = terms.size() - 1;
+    setMaxOccurrencesForTerm(maxOccurrencesForTerm);
     reset();
+  }
+
+  private void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
+    if (maxOccurrencesForTerm <= 0) {
+      this.maxOccurrencesForTerm = 1;
+      return;
+    }
+    this.maxOccurrencesForTerm = maxOccurrencesForTerm;
   }
 
   @Override
@@ -68,11 +77,6 @@ public class BasicTermRandomizer implements TermRandomizer {
   @Override
   public void reset() {
     usedTerms.clear();
-  }
-
-  @Override
-  public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
-    this.maxOccurrencesForTerm = maxOccurrencesForTerm;
   }
 
   @VisibleForTesting
