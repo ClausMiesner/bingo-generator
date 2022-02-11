@@ -81,15 +81,14 @@ public class TableBuilder {
   /**
    * <p>
    * Optional.
-   * Specifies whether the table should separate columns with a straight line.
-   * Default is <code>false</code>. Set to <code>true</code> for a line.
+   * Specifies that the table should separate columns with a straight line.
+   * Default is <code>false</code>. Call method on a builder for a line.
    * </p>
    *
-   * @param hasColumnSeparator whether to separate columns with a printed line
    * @return the table builder object
    */
-  public TableBuilder withColumnSeparator(boolean hasColumnSeparator) {
-    this.hasColumnSeparator = hasColumnSeparator;
+  public TableBuilder withColumnSeparator() {
+    this.hasColumnSeparator = true;
     return this;
   }
 

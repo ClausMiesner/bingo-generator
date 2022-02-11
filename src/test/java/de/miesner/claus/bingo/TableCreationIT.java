@@ -28,7 +28,7 @@ class TableCreationIT {
             .withMaxOccurrencesForTerm(2)
             .withPossibleBingoTerms(possibleTerms)
             .withNumberOfRows(4)
-            .withColumnSeparator(true)
+            .withColumnSeparator()
             .withTextAlignment(LatexTextAlignment.RIGHT_ALIGN)
             .build();
 
