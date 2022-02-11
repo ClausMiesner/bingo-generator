@@ -4,7 +4,6 @@ import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import de.miesner.claus.bingo.table.Table;
 import de.miesner.claus.bingo.util.latex.LatexExpression;
 import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,12 +12,6 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPE
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TableCreationIT {
-
-  @BeforeEach
-  void setUp() {
-
-  }
-
 
   @Test
   void createATable() {
