@@ -17,7 +17,7 @@ public class BasicTermRandomizer implements TermRandomizer {
   @Override
   public void setup(List<String> possibleTerms, int maxOccurrencesForTerm) {
     if (possibleTerms == null || possibleTerms.isEmpty()) {
-      throw new IllegalArgumentException("There need to be possible terms in order to setup the "
+      throw new IllegalArgumentException("There need to be possible terms in order to set up the "
               + getClass().getSimpleName() + ".");
     }
     this.terms = possibleTerms;
@@ -37,7 +37,7 @@ public class BasicTermRandomizer implements TermRandomizer {
   @Override
   public String getNextTerm() {
     if (terms == null) {
-      throw new IllegalStateException("No valid setup was run. No possibleTerms setup.");
+      throw new IllegalStateException("No valid setup was run. No possible terms set up.");
     }
 
     int exclusiveUpperBound = highestIndex + 1;
