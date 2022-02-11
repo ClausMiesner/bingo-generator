@@ -156,7 +156,7 @@ class TableTest {
             .withNumberOfRows(3)
             .withTermRandomizer(new PassThroughTermRandomizer(words))
             .withTextAlignment(LEFT_ALIGN)
-            .withColumnSeparator(true)
+            .withColumnSeparator()
             .build();
     String expected = "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{|l|l|l|}" + LINE_BREAK +

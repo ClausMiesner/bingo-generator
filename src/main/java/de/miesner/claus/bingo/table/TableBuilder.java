@@ -9,7 +9,7 @@ import java.util.List;
 
 import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
-class TableBuilder {
+public class TableBuilder {
 
   private TermRandomizer termRandomizer;
   private int numberOfRows;
@@ -81,15 +81,14 @@ class TableBuilder {
   /**
    * <p>
    * Optional.
-   * Specifies whether the table should separate columns with a straight line.
-   * Default is <code>false</code>. Set to <code>true</code> for a line.
+   * Specifies that the table should separate columns with a straight line.
+   * Default is <code>false</code>. Call method on a builder for a line.
    * </p>
    *
-   * @param hasColumnSeparator whether to separate columns with a printed line
    * @return the table builder object
    */
-  public TableBuilder withColumnSeparator(boolean hasColumnSeparator) {
-    this.hasColumnSeparator = hasColumnSeparator;
+  public TableBuilder withColumnSeparator() {
+    this.hasColumnSeparator = true;
     return this;
   }
 
@@ -107,11 +106,20 @@ class TableBuilder {
    */
   public Table build() {
     checkFieldRequirements();
-    int fieldsPerRow = numberOfRows;
+    setupTermRandomizer();
 
+    int fieldsPerRow = numberOfRows;
     List<String> termsForTable = new ArrayList<>(numberOfRows * fieldsPerRow);
     addTermsRandomly(fieldsPerRow, termsForTable);
+
     return new Table(numberOfRows, termsForTable, textAlignment, hasColumnSeparator);
+  }
+
+  private void setupTermRandomizer() {
+    if (termRandomizer == null) {
+      throw new IllegalStateException("A term randomizer is required but wasn't provided.");
+    }
+    termRandomizer.setup(possibleBingoTerms, maxOccurrencesForTerm);
   }
 
   private void addTermsRandomly(int fieldsPerRow, List<String> termsForTable) {
@@ -133,7 +141,6 @@ class TableBuilder {
     if (maxOccurrencesForTerm < 1) {
       this.maxOccurrencesForTerm = 1;
     }
-    termRandomizer.setMaxOccurrencesForTerm(maxOccurrencesForTerm);
 
     if (rowRequirementTermsMismatch()) {
       throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");

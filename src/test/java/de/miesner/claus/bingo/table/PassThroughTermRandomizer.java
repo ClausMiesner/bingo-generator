@@ -21,7 +21,7 @@ public class PassThroughTermRandomizer implements TermRandomizer {
   }
 
   @Override
-  public void setup(List<String> possibleTerms) {
+  public void setup(List<String> possibleTerms, int maxNumberOfOccurrences) {
     this.terms = possibleTerms;
     setMaxIndex();
   }
@@ -37,10 +37,5 @@ public class PassThroughTermRandomizer implements TermRandomizer {
 
   @Override
   public void reset() {
-  }
-
-  @Override
-  public void setMaxOccurrencesForTerm(int maxOccurrencesForTerm) {
-    // to be implemented
   }
 }
