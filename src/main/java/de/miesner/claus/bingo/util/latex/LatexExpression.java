@@ -10,7 +10,7 @@ public class LatexExpression {
    * </p>
    */
 public static final String TABLE_START = "\\begin{table}\n" +
-                                          "\\begin{tabular}{}" ;
+          "\\begin{tabular}{}" ;
   /**
    * <p>
    *   Offset after which the column design specification has to be inserted into
@@ -48,12 +48,14 @@ public static final String TABLE_ROW_SEPARATOR = "\\hline";
    *   Expressions to close a table.
    * </p>
    */
-public static final String TABLE_END = "\\end{tabular}\n" +
-                                        "\\end{table}";
+  public static final String TABLE_END = "\\end{tabular}\n" +
+          "\\end{table}";
   /**
    * <p>
-   *   Adds a line break in source code.
+   * Adds a line break in source code.
    * </p>
    */
-public static final String LINE_BREAK = "\n";
+  public static final String LINE_BREAK = "\n";
+
+  public static final String LATEX_FILE_SUFFIX = ".tex";
 }
