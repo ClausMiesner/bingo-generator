@@ -7,16 +7,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.LATEX_FILE_SUFFIX;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.DOCUMENT_END;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.DOCUMENT_START;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.FILE_SUFFIX;
 
 public class LatexFileWriter {
 
-  private PrintWriter printWriter;
+  private static PrintWriter printWriter;
 
-  public void writeToFile(List<Table> tables, String fileName) {
+  public static void writeToFile(List<Table> tables, String pathToFile) {
     try {
-      this.printWriter = new PrintWriter(new FileWriter(fileName + LATEX_FILE_SUFFIX));
+      printWriter = new PrintWriter(new FileWriter(pathToFile + FILE_SUFFIX));
 
       writeTexBeginning();
 
@@ -30,12 +31,11 @@ public class LatexFileWriter {
     }
   }
 
-  private void writeTexEnding() {
-    printWriter.printf("\\end{document}" + LINE_BREAK);
+  private static void writeTexBeginning() {
+    printWriter.printf(DOCUMENT_START);
   }
 
-  private void writeTexBeginning() {
-    printWriter.printf("\\documentclass{article}" + LINE_BREAK);
-    printWriter.printf("\\begin{document}" + LINE_BREAK);
+  private static void writeTexEnding() {
+    printWriter.printf(DOCUMENT_END);
   }
 }
