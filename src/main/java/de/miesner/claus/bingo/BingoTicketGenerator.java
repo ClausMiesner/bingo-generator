@@ -28,6 +28,10 @@ public class BingoTicketGenerator {
                               LatexTextAlignment textAlignment) {
     this.terms = terms;
     this.maxNumberOfOccurrences = maxNumberOfOccurrences;
+
+    if (numberOfTickets <= 0) {
+      numberOfTickets = 1;
+    }
     this.numberOfTickets = numberOfTickets;
     this.numberOfRowsPerTicket = numberOfRowsPerTicket;
     this.termRandomizer = termRandomizer;
