@@ -1,6 +1,7 @@
 package de.miesner.claus.bingo.table;
 
 import de.miesner.claus.bingo.random.BasicTermRandomizer;
+import de.miesner.claus.bingo.random.TermRandomizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,8 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARA
 import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.LEFT_ALIGN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TableTest {
   Table table;
@@ -22,12 +25,17 @@ class TableTest {
           "seven", "eight", "nine"
   );
 
+  TermRandomizer mockTermRandomizer = mock(TermRandomizer.class);
+
   @BeforeEach
   void setup() {
+    when(mockTermRandomizer.getNextTerm()).thenReturn("one", "two", "three",
+            "four", "five", "six",
+            "seven", "eight", "nine");
     this.table = Table.builder()
             .withPossibleBingoTerms(sampleWords)
             .withNumberOfRows((int) Math.sqrt(sampleWords.size()))
-            .withTermRandomizer(new PassThroughTermRandomizer(sampleWords))
+            .withTermRandomizer(mockTermRandomizer)
             .build();
   }
 
@@ -55,7 +63,7 @@ class TableTest {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
-            .withTermRandomizer(new PassThroughTermRandomizer(List.of()))
+            .withTermRandomizer(mockTermRandomizer)
             .build(), "Too few terms.");
   }
 
@@ -82,10 +90,11 @@ class TableTest {
   @Test
   void testMoreWordsThanRequired() {
     List<String> terms = List.of("one", "two");
+    when(mockTermRandomizer.getNextTerm()).thenReturn("one", "two");
     this.table = Table.builder()
             .withPossibleBingoTerms(terms)
             .withNumberOfRows(1)
-            .withTermRandomizer(new PassThroughTermRandomizer(terms))
+            .withTermRandomizer(mockTermRandomizer)
             .build();
     String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{ c }" + LINE_BREAK +
@@ -103,16 +112,17 @@ class TableTest {
     assertThrows(IllegalArgumentException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
-            .withTermRandomizer(new PassThroughTermRandomizer(List.of()))
+            .withTermRandomizer(mockTermRandomizer)
             .build());
   }
 
   @Test
   void testToStringWithOneEntry() {
+    when(mockTermRandomizer.getNextTerm()).thenReturn("one");
     this.table = Table.builder()
             .withPossibleBingoTerms(List.of("one"))
             .withNumberOfRows(1)
-            .withTermRandomizer(new PassThroughTermRandomizer(List.of("one")))
+            .withTermRandomizer(mockTermRandomizer)
             .build();
 
     String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
@@ -146,15 +156,13 @@ class TableTest {
 
   @Test
   void testToStringWithLeftAlignAndSeparator() {
-    var words = List.of(
-            "one", "two", "three",
+    when(mockTermRandomizer.getNextTerm()).thenReturn("one", "two", "three",
             "four", "five", "six",
-            "seven", "eight", "nine"
-    );
+            "seven", "eight", "nine");
     this.table = Table.builder()
-            .withPossibleBingoTerms(words)
+            .withPossibleBingoTerms(sampleWords)
             .withNumberOfRows(3)
-            .withTermRandomizer(new PassThroughTermRandomizer(words))
+            .withTermRandomizer(mockTermRandomizer)
             .withTextAlignment(LEFT_ALIGN)
             .withColumnSeparator()
             .build();
