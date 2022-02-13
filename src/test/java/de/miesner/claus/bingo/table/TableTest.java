@@ -87,7 +87,7 @@ class TableTest {
             .withNumberOfRows(1)
             .withTermRandomizer(new PassThroughTermRandomizer(terms))
             .build();
-    String expected = "\\begin{table}" + LINE_BREAK +
+    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{ c }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one" + LINE_BREAK +
@@ -115,7 +115,7 @@ class TableTest {
             .withTermRandomizer(new PassThroughTermRandomizer(List.of("one")))
             .build();
 
-    String expected = "\\begin{table}" + LINE_BREAK +
+    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{ c }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one" + LINE_BREAK +
@@ -128,7 +128,7 @@ class TableTest {
   @Test
   void testToStringWithMultipleEntries() {
 
-    String expected = "\\begin{table}" + LINE_BREAK +
+    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{ c c c }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one & two & three" + LINE_BREAK +
@@ -158,7 +158,7 @@ class TableTest {
             .withTextAlignment(LEFT_ALIGN)
             .withColumnSeparator()
             .build();
-    String expected = "\\begin{table}" + LINE_BREAK +
+    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
             "\\begin{tabular}{|l|l|l|}" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one & two & three" + LINE_BREAK +

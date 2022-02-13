@@ -1,5 +1,6 @@
 package de.miesner.claus.bingo;
 
+import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import de.miesner.claus.bingo.random.TermRandomizer;
 import de.miesner.claus.bingo.table.Table;
 import de.miesner.claus.bingo.table.TableBuilder;
@@ -10,45 +11,46 @@ import java.util.List;
 
 public class BingoTicketGenerator {
 
-  private final List<String> terms;
-  private final int maxNumberOfOccurrences;
-  private final int numberOfTickets;
-  private final int numberOfRowsPerTicket;
-  private final TermRandomizer termRandomizer;
-  private final boolean hasColumnSeparator;
-  private final LatexTextAlignment textAlignment;
+  private static final int DEFAULT_NUMBER_OF_ROWS = 5;
+  private static final LatexTextAlignment DEFAULT_TEXT_ALIGNMENT = LatexTextAlignment.CENTER_ALIGN;
+  private static final int DEFAULT_MAX_OCCURRENCES = 1;
+  private static final int DEFAULT_NUMBER_OF_TICKETS = 1;
 
-
-  public BingoTicketGenerator(List<String> terms,
-                              int maxNumberOfOccurrences,
-                              int numberOfTickets,
-                              int numberOfRowsPerTicket,
-                              TermRandomizer termRandomizer,
-                              boolean hasColumnSeparator,
-                              LatexTextAlignment textAlignment) {
-    this.terms = terms;
-    this.maxNumberOfOccurrences = maxNumberOfOccurrences;
-
-    if (numberOfTickets <= 0) {
-      numberOfTickets = 1;
-    }
-    this.numberOfTickets = numberOfTickets;
-    this.numberOfRowsPerTicket = numberOfRowsPerTicket;
-    this.termRandomizer = termRandomizer;
-    this.hasColumnSeparator = hasColumnSeparator;
-    this.textAlignment = textAlignment;
+  public static List<Table> generateTickets(int numberOfTickets, List<String> terms) {
+    return generateTickets(numberOfTickets, terms, DEFAULT_NUMBER_OF_ROWS);
   }
 
-  public List<Table> generateBingoTickets() {
+  public static List<Table> generateTickets(int numberOfTickets, List<String> terms, int numberOfRowsPerTicket) {
+    return generateTickets(numberOfTickets,
+            terms, numberOfRowsPerTicket, DEFAULT_MAX_OCCURRENCES,
+            new BasicTermRandomizer(),
+            true,
+            DEFAULT_TEXT_ALIGNMENT);
+  }
+
+  public static List<Table> generateTickets(int numberOfTickets,
+                                            List<String> terms, int numberOfRowsPerTicket,
+                                            int maxNumberOfOccurrences,
+                                            TermRandomizer termRandomizer,
+                                            boolean hasColumnSeparator,
+                                            LatexTextAlignment textAlignment) {
+    if (numberOfTickets <= 0) {
+      numberOfTickets = DEFAULT_NUMBER_OF_TICKETS;
+    }
     List<Table> tables = new ArrayList<>(numberOfTickets);
 
     for (int i = 0; i < numberOfTickets; i++) {
-      tables.add(generateSingleBingoTicket());
+      tables.add(generateSingleBingoTicket(terms, numberOfRowsPerTicket, maxNumberOfOccurrences, termRandomizer, textAlignment, hasColumnSeparator));
     }
     return tables;
   }
 
-  private Table generateSingleBingoTicket() {
+  private static Table generateSingleBingoTicket(List<String> terms,
+                                                 int numberOfRowsPerTicket,
+                                                 int maxNumberOfOccurrences,
+                                                 TermRandomizer termRandomizer,
+                                                 LatexTextAlignment textAlignment,
+                                                 boolean hasColumnSeparator) {
     TableBuilder tableBuilder = Table.builder()
             .withPossibleBingoTerms(terms)
             .withMaxOccurrencesForTerm(maxNumberOfOccurrences)
