@@ -4,22 +4,6 @@ public class LatexExpression {
 
   /**
    * <p>
-   * Provides expression to create the start of a table.
-   * After the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_COLUMN_SPECIFICATION_OFFSET}
-   * insert the style for the columns.
-   * </p>
-   */
-  public static final String TABLE_START = "\\begin{table}\n" +
-          "\\begin{tabular}{}";
-  /**
-   * <p>
-   * Offset after which the column design specification has to be inserted into
-   * the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_START}.
-   * </p>
-   */
-  public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 30;
-  /**
-   * <p>
    * Separator to use in the column design specification of a tabular.
    * Results in printed horizontal divider lines in a table.
    * </p>
@@ -31,6 +15,14 @@ public class LatexExpression {
    * </p>
    */
   public static final String TABLE_ROW_BREAK = "\\\\";
+
+  /**
+   * <p>
+   * Adds a line break in source code.
+   * </p>
+   */
+  public static final String LINE_BREAK = "\n";
+
   /**
    * <p>
    * Used in between entries of a table row.
@@ -43,19 +35,31 @@ public class LatexExpression {
    * </p>
    */
   public static final String TABLE_ROW_SEPARATOR = "\\hline";
+
+  /**
+   * <p>
+   * Provides expression to create the start of a table.
+   * After the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_COLUMN_SPECIFICATION_OFFSET}
+   * insert the style for the columns.
+   * </p>
+   */
+  public static final String TABLE_START = LINE_BREAK + "\\begin{table}\n" +
+          "\\begin{tabular}{}";
+  /**
+   * <p>
+   * Offset after which the column design specification has to be inserted into
+   * the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_START}.
+   * </p>
+   */
+  public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 31;
+
   /**
    * <p>
    * Expressions to close a table.
    * </p>
    */
   public static final String TABLE_END = "\\end{tabular}\n" +
-          "\\end{table}";
-  /**
-   * <p>
-   * Adds a line break in source code.
-   * </p>
-   */
-  public static final String LINE_BREAK = "\n";
+          "\\end{table}" + LINE_BREAK;
 
   /**
    * <p>
