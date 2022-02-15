@@ -3,15 +3,15 @@
 ## Abstract
 
 Use this bingo generator to create bingo tickets. It can be used to create multiple bingo tickets from a set of possible
-bingo terms. The bingo generator will produce a compile-ready <code>bingo.tex</code> file which you can transform into a
-printable <code>bingo.pdf</code> with a single command.
+bingo terms. The bingo generator will produce a compile-ready <code>bingo.tex</code> LaTex file which you can be
+transformed into a printable <code>bingo.pdf</code> with a single command.
 
-Never has it been so easy to create multiple bingo tickets.
+Never has it been easier to create multiple bingo tickets.
 
 ## Table of contents
 
-[When to use](#when_to_use) </br>
-[How to use](#how_to_use)
+[When to use](#when-to-use) </br>
+[How to use](#how-to-use)
 
 ## When to use
 
@@ -22,7 +22,7 @@ Alternatively you can also use numbers as the terms and randomly pick them for a
 
 ## How to use
 
-With this bingo generator you can create as many bingo tickets as you would like (technically it is limited by <code>
+With this bingo generator you can create as many bingo tickets as you would like (technically it is limited to <code>
 Integer.MAX_VALUE</code>).
 
 1. Create a list of strings witch contains all possible bingo terms.
@@ -35,7 +35,11 @@ Integer.MAX_VALUE</code>).
 
 The bingo tickets are written into a <code>bingo.tex</code> file, which is a [LaTex](https://www.latex-project.org)
 file. In order to create the pdf file a LaTex compiler is needed. For this have a look
-at [TexLive](https://www.tug.org/texlive/). For MacOS you can
+at [TexLive](https://www.tug.org/texlive/). For macOS, you can
 use [MacTex](https://www.tug.org/mactex/mactex-download.html).
 
 4. Using a LaTex compiler, compile the <code>bingo.tex</code> file.
+   * For TexLive and MacTex you can use
+   ```
+   pdflatex <path_to_bingo.tex>
+   ``` 
