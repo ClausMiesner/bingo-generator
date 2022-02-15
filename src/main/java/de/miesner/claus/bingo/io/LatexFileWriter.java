@@ -14,10 +14,12 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.FILE_SUFFIX;
 public class LatexFileWriter {
 
   private static PrintWriter printWriter;
+  private static final String DEFAULT_FILE_NAME = "bingo";
+  private static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
   public static void writeToFile(List<Table> tables, String pathToFile) {
     try {
-      printWriter = new PrintWriter(new FileWriter(pathToFile + FILE_SUFFIX));
+      printWriter = new PrintWriter(new FileWriter(pathToFile + FILE_SEPARATOR + DEFAULT_FILE_NAME + FILE_SUFFIX));
 
       writeTexBeginning();
 
