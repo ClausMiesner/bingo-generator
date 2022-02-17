@@ -26,7 +26,7 @@ With this bingo generator you can create as many bingo tickets as you would like
 Integer.MAX_VALUE</code>).
 
 1. Build the project with `mvn clean install`
-2. Under the `bingo-generator/target` folder you will find a `bingo-generator-1.0-SNAPSHOT-jar-with-dependencies.jar`
+2. Under the `bingo-generator/target` folder you will find a `bingo-generator-1.0-SNAPSHOT.jar`
    file
 3. On the command line run:
 
