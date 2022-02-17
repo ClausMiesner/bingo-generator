@@ -25,11 +25,20 @@ Alternatively you can also use numbers as the terms and randomly pick them for a
 With this bingo generator you can create as many bingo tickets as you would like (technically it is limited to <code>
 Integer.MAX_VALUE</code>).
 
-1. Create a list of strings witch contains all possible bingo terms.
-2. Call a <code>BingoTicketGenerator#generateTickets</code> method and specify all desired options.
-3. Use the <code>LatexFileWrite#writeToFile</code> method to write the created bingo tables to a file. Specify the path
-   where the
-   <code>bingo.tex</code> file should be created.
+1. Build the project with `mvn clean install`
+2. Under the `bingo-generator/target` folder you will find a `bingo-generator-1.0-SNAPSHOT.jar`
+   file
+3. On the command line run:
+
+```
+java -jar <pathOfJar> <numberTickets> <rowsPerTicket> <path> <terms>
+```
+
+* Where `pathOfJar` is the path of the created jar file,
+* `numberOfTickets` is an integer number specifying the amount of bingo tickets that will be created,
+* `rowsPerTicket` is an integer number specifying the number of rows per bingo tickets,
+* `path` is the path to the location where the bingo ticket file should be created,
+* `terms` are the possible terms for all bingo tickets seperated by single spaces.
 
 ### Installing compiler for creating pdf file
 
