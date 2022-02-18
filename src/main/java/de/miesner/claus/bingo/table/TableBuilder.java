@@ -134,7 +134,8 @@ public class TableBuilder {
   private void checkFieldRequirements() {
     if (requiredValueMissing()) {
       throw new MisconfigurationException(
-              "You need to specify reasonable value for rows per table (was: '" + numberOfRows + "') and " +
+              "A mandatory requirement for building the tables is missing. " +
+                      "You need to specify reasonable value for rows per table (was: '" + numberOfRows + "') and " +
                       "supply a matching list of possible terms. " +
                       "Also make sure to provide a term randomizer.");
     }
@@ -144,7 +145,8 @@ public class TableBuilder {
     }
 
     if (rowRequirementTermsMismatch()) {
-      throw new MisconfigurationException("Number of rows mismatches provided number of terms.");
+      throw new MisconfigurationException("Number of rows mismatches provided number of terms. " +
+              "Without double terms, please provide at least the square of the desired number of rows.");
     }
   }
 
