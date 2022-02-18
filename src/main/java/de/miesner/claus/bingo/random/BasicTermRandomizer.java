@@ -1,6 +1,7 @@
 package de.miesner.claus.bingo.random;
 
 import com.google.common.annotations.VisibleForTesting;
+import de.miesner.claus.bingo.MisconfigurationException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,7 @@ public class BasicTermRandomizer implements TermRandomizer {
   @Override
   public void setup(List<String> possibleTerms, int maxOccurrencesForTerm) {
     if (possibleTerms == null || possibleTerms.isEmpty()) {
-      throw new IllegalArgumentException("There need to be possible terms in order to set up the "
+      throw new MisconfigurationException("No terms found. There need to be possible terms in order to set up the "
               + getClass().getSimpleName() + ".");
     }
     this.terms = possibleTerms;
@@ -37,7 +38,8 @@ public class BasicTermRandomizer implements TermRandomizer {
   @Override
   public String getNextTerm() {
     if (terms == null) {
-      throw new IllegalStateException("No valid setup was run. No possible terms set up.");
+      throw new IllegalStateException("No valid setup was run. No possible terms set up. " +
+              "Make sure to run a setup before asking for the next term.");
     }
 
     int exclusiveUpperBound = highestIndex + 1;

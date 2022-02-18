@@ -1,6 +1,7 @@
 package de.miesner.claus.bingo.table;
 
 import com.google.common.annotations.VisibleForTesting;
+import de.miesner.claus.bingo.MisconfigurationException;
 import de.miesner.claus.bingo.random.TermRandomizer;
 import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
@@ -117,7 +118,7 @@ public class TableBuilder {
 
   private void setupTermRandomizer() {
     if (termRandomizer == null) {
-      throw new IllegalStateException("A term randomizer is required but wasn't provided.");
+      throw new MisconfigurationException("A term randomizer is required but wasn't provided.");
     }
     termRandomizer.setup(possibleBingoTerms, maxOccurrencesForTerm);
   }
@@ -132,8 +133,9 @@ public class TableBuilder {
 
   private void checkFieldRequirements() {
     if (requiredValueMissing()) {
-      throw new IllegalArgumentException(
-              "You need to specify reasonable value for rows per table (was: '" + numberOfRows + "') and " +
+      throw new MisconfigurationException(
+              "A mandatory requirement for building the tables is missing. " +
+                      "You need to specify reasonable value for rows per table (was: '" + numberOfRows + "') and " +
                       "supply a matching list of possible terms. " +
                       "Also make sure to provide a term randomizer.");
     }
@@ -143,7 +145,8 @@ public class TableBuilder {
     }
 
     if (rowRequirementTermsMismatch()) {
-      throw new IllegalArgumentException("Number of rows mismatches provided number of terms.");
+      throw new MisconfigurationException("Number of rows mismatches provided number of terms. " +
+              "Without double terms, please provide at least the square of the desired number of rows.");
     }
   }
 

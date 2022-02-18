@@ -1,6 +1,7 @@
 package de.miesner.claus.bingo.random;
 
 
+import de.miesner.claus.bingo.MisconfigurationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,12 +50,12 @@ class BasicTermRandomizerTest {
 
   @Test
   void testSetupWithNoTerms() {
-    assertThrows(IllegalArgumentException.class, () -> termRandomizer.setup(List.of(), defaultMaxOccurrences));
+    assertThrows(MisconfigurationException.class, () -> termRandomizer.setup(List.of(), defaultMaxOccurrences));
   }
 
   @Test
   void testSetupWithNullAsTerms() {
-    assertThrows(IllegalArgumentException.class, () -> termRandomizer.setup(null, defaultMaxOccurrences));
+    assertThrows(MisconfigurationException.class, () -> termRandomizer.setup(null, defaultMaxOccurrences));
   }
 
   @Test

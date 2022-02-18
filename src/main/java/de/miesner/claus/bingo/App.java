@@ -15,6 +15,12 @@ public class App {
     String pathToFile = args[2];
     List<String> terms = new ArrayList<>(Arrays.asList(args).subList(3, args.length));
 
-    writeToFile(generateTickets(numberOfTickets, terms, numberOfRowsPerTicket), pathToFile);
+    try {
+      writeToFile(generateTickets(numberOfTickets, terms, numberOfRowsPerTicket), pathToFile);
+    } catch (MisconfigurationException e) {
+      System.out.println("There was an unexpected behavior. The following is in misconfiguration: " + e.getMessage());
+    } catch (IllegalStateException e) {
+      System.out.println("There was an unexpected behavior. The application is in a corrupted state. " + e.getMessage());
+    }
   }
 }
