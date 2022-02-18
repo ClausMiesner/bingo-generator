@@ -1,5 +1,6 @@
 package de.miesner.claus.bingo.table;
 
+import de.miesner.claus.bingo.MisconfigurationException;
 import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import de.miesner.claus.bingo.random.TermRandomizer;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,12 +42,12 @@ class TableTest {
 
   @Test
   void testTooFewInformationRows() {
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(0)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(new BasicTermRandomizer())
             .build(), "No rows requested.");
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(-1)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(new BasicTermRandomizer())
@@ -55,12 +56,12 @@ class TableTest {
 
   @Test
   void testTooFewInformationTerms() {
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(null)
             .withTermRandomizer(new BasicTermRandomizer())
             .build(), "Terms are null.");
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
             .withTermRandomizer(mockTermRandomizer)
@@ -69,7 +70,7 @@ class TableTest {
 
   @Test
   void testTooFewInformationTermRandomizer() {
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of("one"))
             .withTermRandomizer(null)
@@ -109,7 +110,7 @@ class TableTest {
 
   @Test
   void testTooManyRowsWanted() {
-    assertThrows(IllegalArgumentException.class, () -> Table.builder()
+    assertThrows(MisconfigurationException.class, () -> Table.builder()
             .withNumberOfRows(1)
             .withPossibleBingoTerms(List.of())
             .withTermRandomizer(mockTermRandomizer)
