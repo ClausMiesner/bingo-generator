@@ -50,10 +50,11 @@ public class Table {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
+    int numberOfColumns = numberOfRows;
 
     stringBuilder
             .append(TABLE_START)
-            .insert(TABLE_COLUMN_SPECIFICATION_OFFSET, createColumnLayout());
+            .insert(TABLE_COLUMN_SPECIFICATION_OFFSET, numberOfColumns);
     stringBuilder
             .append(LINE_BREAK)
             .append(TABLE_ROW_SEPARATOR)
