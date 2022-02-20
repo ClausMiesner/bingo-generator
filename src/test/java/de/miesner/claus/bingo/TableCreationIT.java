@@ -3,7 +3,6 @@ package de.miesner.claus.bingo;
 import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import de.miesner.claus.bingo.table.Table;
 import de.miesner.claus.bingo.util.latex.LatexExpression;
-import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -22,7 +21,6 @@ class TableCreationIT {
             .withPossibleBingoTerms(possibleTerms)
             .withNumberOfRows(4)
             .withColumnSeparator()
-            .withTextAlignment(LatexTextAlignment.RIGHT_ALIGN)
             .build();
 
     String tableStartWithoutColumnSpecification = LatexExpression.TABLE_START.substring(0, TABLE_COLUMN_SPECIFICATION_OFFSET - 1);

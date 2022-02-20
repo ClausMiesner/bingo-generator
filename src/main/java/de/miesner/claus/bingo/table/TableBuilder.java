@@ -3,18 +3,14 @@ package de.miesner.claus.bingo.table;
 import com.google.common.annotations.VisibleForTesting;
 import de.miesner.claus.bingo.MisconfigurationException;
 import de.miesner.claus.bingo.random.TermRandomizer;
-import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.CENTER_ALIGN;
 
 public class TableBuilder {
 
   private TermRandomizer termRandomizer;
   private int numberOfRows;
-  private LatexTextAlignment textAlignment = CENTER_ALIGN;
   private boolean hasColumnSeparator = false;
   private List<String> possibleBingoTerms;
   private int maxOccurrencesForTerm = 1;
@@ -67,21 +63,6 @@ public class TableBuilder {
   /**
    * <p>
    * Optional.
-   * Specifies the align style of text in all fields of the table.
-   * The default is center alignment. (see {@link LatexTextAlignment#CENTER_ALIGN})
-   * </p>
-   *
-   * @param alignmentOption the {@link LatexTextAlignment} option to use
-   * @return the table builder object
-   */
-  public TableBuilder withTextAlignment(LatexTextAlignment alignmentOption) {
-    this.textAlignment = alignmentOption;
-    return this;
-  }
-
-  /**
-   * <p>
-   * Optional.
    * Specifies that the table should separate columns with a straight line.
    * Default is <code>false</code>. Call method on a builder for a line.
    * </p>
@@ -113,7 +94,7 @@ public class TableBuilder {
     List<String> termsForTable = new ArrayList<>(numberOfRows * fieldsPerRow);
     addTermsRandomly(fieldsPerRow, termsForTable);
 
-    return new Table(numberOfRows, termsForTable, textAlignment, hasColumnSeparator);
+    return new Table(numberOfRows, termsForTable, hasColumnSeparator);
   }
 
   private void setupTermRandomizer() {

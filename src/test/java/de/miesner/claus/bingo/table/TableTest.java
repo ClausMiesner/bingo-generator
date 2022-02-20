@@ -12,7 +12,6 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
-import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.LEFT_ALIGN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -164,7 +163,6 @@ class TableTest {
             .withPossibleBingoTerms(sampleWords)
             .withNumberOfRows(3)
             .withTermRandomizer(mockTermRandomizer)
-            .withTextAlignment(LEFT_ALIGN)
             .withColumnSeparator()
             .build();
     String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
