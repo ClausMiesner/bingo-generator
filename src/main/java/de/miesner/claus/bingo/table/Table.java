@@ -76,7 +76,7 @@ public class Table {
     StringBuilder stringBuilder = new StringBuilder();
     appendColumnSeparatorOrSpace(stringBuilder);
     for (int i = 0; i < numberOfRows; i++) {
-      stringBuilder.append(textAlignment.getAlignment());
+      stringBuilder.append("X");
       appendColumnSeparatorOrSpace(stringBuilder);
     }
     return stringBuilder.toString();
