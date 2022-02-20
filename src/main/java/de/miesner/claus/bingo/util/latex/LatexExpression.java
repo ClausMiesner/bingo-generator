@@ -50,7 +50,7 @@ public class LatexExpression {
    * insert the style for the columns.
    * </p>
    */
-  public static final String TABLE_START = "\\begin{tabularx}{\\textwidth}{}" + LINE_BREAK;
+  public static final String TABLE_START = "\\begin{tabularx}{\\textwidth}{}";
   /**
    * <p>
    * Offset after which the column design specification has to be inserted into

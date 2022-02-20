@@ -26,7 +26,7 @@ class TableCreationIT {
     String tableStartWithoutColumnSpecification = LatexExpression.TABLE_START.substring(0, TABLE_COLUMN_SPECIFICATION_OFFSET - 1);
     assertThat(table.toString())
             .as("Beginning of LaTex Table is correct.").startsWith(tableStartWithoutColumnSpecification)
-            .as("Column specification is correct.").containsIgnoringWhitespaces("|r|r|r|r|")
+            .as("Column specification is correct.").containsIgnoringWhitespaces("|X|X|X|X|")
             .as("Contains every term twice.")
             .containsPattern("beer[\\W,\\w]+beer")
             .containsPattern("wine[\\W,\\w]+wine")
@@ -37,7 +37,5 @@ class TableCreationIT {
             .containsPattern("coffee[\\W,\\w]+coffee")
             .containsPattern("mate[\\W,\\w]+mate")
             .as("Ending of LaTex Table is correct.").endsWith(LatexExpression.TABLE_END);
-
-
   }
 }
