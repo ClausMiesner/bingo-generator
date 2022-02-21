@@ -23,7 +23,9 @@ public class TermFileReader {
     List<String> result = new ArrayList<>();
     try {
       while ((term = bufferedReader.readLine()) != null) {
-        result.add(term);
+        if (!term.isBlank()) {
+          result.add(term);
+        }
       }
     } catch (IOException e) {
       e.printStackTrace();
