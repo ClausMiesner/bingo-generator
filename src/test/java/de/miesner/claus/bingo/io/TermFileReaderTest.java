@@ -39,7 +39,13 @@ class TermFileReaderTest {
   void testNoTermsInFile() {
     termFileReader = new TermFileReader(pathToResources + "noTerms");
 
-    assertThrows(MisconfigurationException.class, () ->
-            termFileReader.read());
+    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
+  }
+
+  @Test
+  void testEmptyLinesInFile() {
+    termFileReader = new TermFileReader(pathToResources + "emptyLines");
+
+    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
   }
 }

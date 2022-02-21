@@ -28,9 +28,17 @@ public class TermFileReader {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    if (result.isEmpty()) {
+    if (isEmpty(result)) {
       throw new MisconfigurationException("There weren't any terms found in '" + path + "'.");
     }
     return result;
+  }
+
+  private boolean isEmpty(List<String> terms) {
+    return terms.isEmpty() || containsOnlyEmptyStrings(terms);
+  }
+
+  private boolean containsOnlyEmptyStrings(List<String> terms) {
+    return terms.stream().allMatch(String::isEmpty);
   }
 }
