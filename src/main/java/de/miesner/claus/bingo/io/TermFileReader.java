@@ -1,5 +1,7 @@
 package de.miesner.claus.bingo.io;
 
+import de.miesner.claus.bingo.MisconfigurationException;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,6 +27,9 @@ public class TermFileReader {
       }
     } catch (IOException e) {
       e.printStackTrace();
+    }
+    if (result.isEmpty()) {
+      throw new MisconfigurationException("There weren't any terms found in '" + path + "'.");
     }
     return result;
   }

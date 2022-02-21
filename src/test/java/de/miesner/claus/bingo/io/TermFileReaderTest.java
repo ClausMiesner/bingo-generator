@@ -1,5 +1,6 @@
 package de.miesner.claus.bingo.io;
 
+import de.miesner.claus.bingo.MisconfigurationException;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -32,5 +33,13 @@ class TermFileReaderTest {
     List<String> expected = List.of("firstTerm", "secondTerm", "thirdTerm");
 
     assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+  }
+
+  @Test
+  void testNoTermsInFile() {
+    termFileReader = new TermFileReader(pathToResources + "noTerms");
+
+    assertThrows(MisconfigurationException.class, () ->
+            termFileReader.read());
   }
 }
