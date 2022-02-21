@@ -1,7 +1,6 @@
 package de.miesner.claus.bingo.table;
 
 import com.google.common.annotations.VisibleForTesting;
-import de.miesner.claus.bingo.util.latex.LatexTextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +18,12 @@ public class Table {
   private final int numberOfRows;
   private final List<String> words;
   private final Row[] rows;
-  private final LatexTextAlignment textAlignment;
   private final boolean hasColumnSeparators;
 
-  Table(int numberOfRows, List<String> words, LatexTextAlignment textAlignment, boolean hasColumnSeparators) {
+  Table(int numberOfRows, List<String> words, boolean hasColumnSeparators) {
     this.numberOfRows = numberOfRows;
     this.words = words;
     this.rows = createRows();
-    this.textAlignment = textAlignment;
     this.hasColumnSeparators = hasColumnSeparators;
   }
 
@@ -76,7 +73,7 @@ public class Table {
     StringBuilder stringBuilder = new StringBuilder();
     appendColumnSeparatorOrSpace(stringBuilder);
     for (int i = 0; i < numberOfRows; i++) {
-      stringBuilder.append(textAlignment.getAlignment());
+      stringBuilder.append("X");
       appendColumnSeparatorOrSpace(stringBuilder);
     }
     return stringBuilder.toString();

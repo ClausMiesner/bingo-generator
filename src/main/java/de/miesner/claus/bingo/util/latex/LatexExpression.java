@@ -36,6 +36,13 @@ public class LatexExpression {
    */
   public static final String TABLE_ROW_SEPARATOR = "\\hline";
 
+  private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK;
+
+  private static final String TABLE_DEFINITION = "\\newcolumntype{z}[1] {" + LINE_BREAK +
+          "@{{\\centering \\parbox[c]{\\tabcolsep}{\\rule{0pt}{#1 + 2\\tabcolsep}}}} >{\\centering\\arraybackslash}" + LINE_BREAK +
+          "m{#1} }" + LINE_BREAK +
+          "\\renewcommand{\\tabularxcolumn}[1]{z{#1}}" + LINE_BREAK;
+
   /**
    * <p>
    * Provides expression to create the start of a table.
@@ -43,23 +50,21 @@ public class LatexExpression {
    * insert the style for the columns.
    * </p>
    */
-  public static final String TABLE_START = LINE_BREAK + "\\begin{table}\n" +
-          "\\begin{tabular}{}";
+  public static final String TABLE_START = "\\begin{tabularx}{\\textwidth}{}";
   /**
    * <p>
    * Offset after which the column design specification has to be inserted into
    * the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_START}.
    * </p>
    */
-  public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 31;
+  public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 29;
 
   /**
    * <p>
    * Expressions to close a table.
    * </p>
    */
-  public static final String TABLE_END = "\\end{tabular}\n" +
-          "\\end{table}" + LINE_BREAK;
+  public static final String TABLE_END = "\\end{tabularx}" + LINE_BREAK;
 
   /**
    * <p>
@@ -73,7 +78,7 @@ public class LatexExpression {
    * Start of LaTex file.
    * </p>
    */
-  public static final String DOCUMENT_START = "\\documentclass{article}" + LINE_BREAK + "\\begin{document}" + LINE_BREAK;
+  public static final String DOCUMENT_START = "\\documentclass{article}" + LINE_BREAK + PACKAGE_IMPORT + TABLE_DEFINITION + "\\begin{document}" + LINE_BREAK;
 
   /**
    * <p>

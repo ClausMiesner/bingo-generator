@@ -12,7 +12,6 @@ import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
 import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
-import static de.miesner.claus.bingo.util.latex.LatexTextAlignment.LEFT_ALIGN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -97,8 +96,7 @@ class TableTest {
             .withNumberOfRows(1)
             .withTermRandomizer(mockTermRandomizer)
             .build();
-    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
-            "\\begin{tabular}{ c }" + LINE_BREAK +
+    String expected = "\\begin{tabularx}{\\textwidth}{ X }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one" + LINE_BREAK +
             TABLE_ROW_BREAK + LINE_BREAK +
@@ -126,8 +124,7 @@ class TableTest {
             .withTermRandomizer(mockTermRandomizer)
             .build();
 
-    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
-            "\\begin{tabular}{ c }" + LINE_BREAK +
+    String expected = "\\begin{tabularx}{\\textwidth}{ X }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one" + LINE_BREAK +
             TABLE_ROW_BREAK + LINE_BREAK +
@@ -139,36 +136,7 @@ class TableTest {
   @Test
   void testToStringWithMultipleEntries() {
 
-    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
-            "\\begin{tabular}{ c c c }" + LINE_BREAK +
-            TABLE_ROW_SEPARATOR + LINE_BREAK +
-            "one & two & three" + LINE_BREAK +
-            TABLE_ROW_BREAK + LINE_BREAK +
-            TABLE_ROW_SEPARATOR + LINE_BREAK +
-            "four & five & six" + LINE_BREAK +
-            TABLE_ROW_BREAK + LINE_BREAK +
-            TABLE_ROW_SEPARATOR + LINE_BREAK +
-            "seven & eight & nine" + LINE_BREAK +
-            TABLE_ROW_BREAK + LINE_BREAK +
-            TABLE_ROW_SEPARATOR + LINE_BREAK +
-            TABLE_END;
-    assertThat(table.toString()).isEqualTo(expected);
-  }
-
-  @Test
-  void testToStringWithLeftAlignAndSeparator() {
-    when(mockTermRandomizer.getNextTerm()).thenReturn("one", "two", "three",
-            "four", "five", "six",
-            "seven", "eight", "nine");
-    this.table = Table.builder()
-            .withPossibleBingoTerms(sampleWords)
-            .withNumberOfRows(3)
-            .withTermRandomizer(mockTermRandomizer)
-            .withTextAlignment(LEFT_ALIGN)
-            .withColumnSeparator()
-            .build();
-    String expected = LINE_BREAK + "\\begin{table}" + LINE_BREAK +
-            "\\begin{tabular}{|l|l|l|}" + LINE_BREAK +
+    String expected = "\\begin{tabularx}{\\textwidth}{ X X X }" + LINE_BREAK +
             TABLE_ROW_SEPARATOR + LINE_BREAK +
             "one & two & three" + LINE_BREAK +
             TABLE_ROW_BREAK + LINE_BREAK +
