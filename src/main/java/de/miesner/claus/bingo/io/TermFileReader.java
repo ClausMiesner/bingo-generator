@@ -24,7 +24,7 @@ public class TermFileReader {
     try {
       while ((term = bufferedReader.readLine()) != null) {
         if (!term.isBlank()) {
-          result.add(term);
+          result.add(term.trim());
         }
       }
     } catch (IOException e) {

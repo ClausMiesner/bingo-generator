@@ -63,4 +63,12 @@ class TermFileReaderTest {
 
     assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
   }
+
+  @Test
+  void testRemoveTrailingWhitespaces() throws FileNotFoundException {
+    termFileReader = new TermFileReader(pathToResources + "termsWithTrailingWhitespaces");
+    List<String> expected = List.of("one", "two", "three", "horse power");
+
+    assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+  }
 }
