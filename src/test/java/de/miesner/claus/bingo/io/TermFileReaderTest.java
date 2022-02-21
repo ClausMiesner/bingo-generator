@@ -55,4 +55,12 @@ class TermFileReaderTest {
 
     assertThrows(MisconfigurationException.class, () -> termFileReader.read());
   }
+
+  @Test
+  void testBlankTermsBetweenAreIgnored() throws FileNotFoundException {
+    termFileReader = new TermFileReader(pathToResources + "termsAndBlanks");
+    List<String> expected = List.of("one", "two", "three", "four");
+
+    assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+  }
 }
