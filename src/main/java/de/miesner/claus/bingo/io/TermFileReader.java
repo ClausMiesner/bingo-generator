@@ -35,10 +35,10 @@ public class TermFileReader {
   }
 
   private boolean isEmpty(List<String> terms) {
-    return terms.isEmpty() || containsOnlyEmptyStrings(terms);
+    return terms.isEmpty() || containsOnlyBlankStrings(terms);
   }
 
-  private boolean containsOnlyEmptyStrings(List<String> terms) {
-    return terms.stream().allMatch(String::isEmpty);
+  private boolean containsOnlyBlankStrings(List<String> terms) {
+    return terms.stream().allMatch(String::isBlank);
   }
 }

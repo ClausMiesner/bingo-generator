@@ -48,4 +48,11 @@ class TermFileReaderTest {
 
     assertThrows(MisconfigurationException.class, () -> termFileReader.read());
   }
+
+  @Test
+  void testOnlyBlankTerms() {
+    termFileReader = new TermFileReader(pathToResources + "blankTerms");
+
+    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
+  }
 }
