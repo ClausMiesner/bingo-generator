@@ -28,13 +28,13 @@ public class TermFileReader {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    if (isEmpty(result)) {
+    if (isEmptyOrBlank(result)) {
       throw new MisconfigurationException("There weren't any terms found in '" + path + "'.");
     }
     return result;
   }
 
-  private boolean isEmpty(List<String> terms) {
+  private boolean isEmptyOrBlank(List<String> terms) {
     return terms.isEmpty() || containsOnlyBlankStrings(terms);
   }
 
