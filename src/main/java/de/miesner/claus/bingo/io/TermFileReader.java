@@ -1,0 +1,31 @@
+package de.miesner.claus.bingo.io;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TermFileReader {
+
+  private final String path;
+
+  public TermFileReader(String termFilePath) {
+    this.path = termFilePath;
+  }
+
+  public List<String> read() throws FileNotFoundException {
+    BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+    String term;
+    List<String> result = new ArrayList<>();
+    try {
+      while ((term = bufferedReader.readLine()) != null) {
+        result.add(term);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return result;
+  }
+}
