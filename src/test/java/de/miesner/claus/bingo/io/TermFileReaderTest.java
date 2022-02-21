@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TermFileReaderTest {
@@ -15,5 +16,11 @@ class TermFileReaderTest {
     assertThrows(FileNotFoundException.class, () -> termFileReader.read());
   }
 
+  @Test
+  void testOneTermInFile() throws FileNotFoundException {
+    termFileReader = new TermFileReader("src/test/resources/oneTerm");
+    String expected = "firstTerm";
 
+    assertThat(termFileReader.read()).containsExactly(expected);
+  }
 }
