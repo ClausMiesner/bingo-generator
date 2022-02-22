@@ -19,13 +19,13 @@ import static org.mockito.Mockito.when;
 
 class TableTest {
   Table table;
-  List<String> sampleWords = List.of(
+  final List<String> sampleWords = List.of(
           "one", "two", "three",
           "four", "five", "six",
           "seven", "eight", "nine"
   );
 
-  TermRandomizer mockTermRandomizer = mock(TermRandomizer.class);
+  final TermRandomizer mockTermRandomizer = mock(TermRandomizer.class);
 
   @BeforeEach
   void setup() {

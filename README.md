@@ -38,8 +38,15 @@ java -jar <pathOfJar> <numberTickets> <rowsPerTicket> <path> <terms>
 * `numberOfTickets` is an integer number specifying the amount of bingo tickets that will be created,
 * `rowsPerTicket` is an integer number specifying the number of rows per bingo tickets,
 * `path` is the path to the location where the bingo ticket file should be created,
-* `terms` are the possible terms for all bingo tickets seperated by single spaces.
-
+* `terms` are the possible terms for all bingo tickets seperated by single spaces or the path of a file containing all
+  terms. The terms in the file have to be written one on each line. There is no separator needed.
+  > List of terms containing 4 entries:
+  ```text
+  firstTerm
+  secondTerm
+  Two words
+  as one
+  ```
 ### Installing compiler for creating pdf file
 
 The bingo tickets are written into a <code>bingo.tex</code> file, which is a [LaTex](https://www.latex-project.org)
@@ -48,7 +55,7 @@ at [TexLive](https://www.tug.org/texlive/). For macOS, you can
 use [MacTex](https://www.tug.org/mactex/mactex-download.html).
 
 4. Using a LaTex compiler, compile the <code>bingo.tex</code> file.
-   * For TexLive and MacTex you can use
+    * For TexLive and MacTex you can use
    ```
    pdflatex <path_to_bingo.tex>
    ``` 
