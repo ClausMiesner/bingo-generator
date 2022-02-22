@@ -13,11 +13,12 @@ public class TermFileReader {
 
   public static List<String> read(String path) throws FileNotFoundException {
     BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-    String term;
     List<String> result = new ArrayList<>();
+
+    String term;
     try {
       while ((term = bufferedReader.readLine()) != null) {
-        if (!term.isBlank()) {
+        if (isPresent(term)) {
           result.add(term.trim());
         }
       }
@@ -28,6 +29,10 @@ public class TermFileReader {
       throw new MisconfigurationException("There weren't any terms found in '" + path + "'.");
     }
     return result;
+  }
+
+  private static boolean isPresent(String s) {
+    return !s.isBlank();
   }
 
   private static boolean isEmptyOrBlank(List<String> terms) {
