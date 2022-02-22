@@ -9,9 +9,9 @@ import static de.miesner.claus.bingo.io.LatexFileWriter.writeToFile;
 
 class SystemTest {
 
-  int numberOfTickets = 5;
-  String pathToFile = "/Users/Claus/Desktop";
-  List<String> terms = List.of(
+  final int numberOfTickets = 5;
+  final String pathToFile = "/Users/Claus/Desktop";
+  final List<String> terms = List.of(
           "Hund gelb zwei", "Katze blau eins", "Maus rot drei", "Elefant", "Bieber",
           "Waschbär", "Nashorn", "Igel", "Schwein", "Kuh",
           "Huhn", "Ratte", "Lama", "Pferd", "Reh",

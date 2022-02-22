@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TermFileReaderTest {
-  String pathToResources = "src/test/resources/";
+  final String pathToResources = "src/test/resources/";
 
   @Test
   void testFileDoesNotExist() {
