@@ -11,13 +11,7 @@ import java.util.List;
 
 public class TermFileReader {
 
-  private final String path;
-
-  public TermFileReader(String termFilePath) {
-    this.path = termFilePath;
-  }
-
-  public List<String> read() throws FileNotFoundException {
+  public static List<String> read(String path) throws FileNotFoundException {
     BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
     String term;
     List<String> result = new ArrayList<>();
@@ -36,11 +30,11 @@ public class TermFileReader {
     return result;
   }
 
-  private boolean isEmptyOrBlank(List<String> terms) {
+  private static boolean isEmptyOrBlank(List<String> terms) {
     return terms.isEmpty() || containsOnlyBlankStrings(terms);
   }
 
-  private boolean containsOnlyBlankStrings(List<String> terms) {
+  private static boolean containsOnlyBlankStrings(List<String> terms) {
     return terms.stream().allMatch(String::isBlank);
   }
 }

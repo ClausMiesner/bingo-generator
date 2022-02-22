@@ -6,69 +6,58 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import static de.miesner.claus.bingo.io.TermFileReader.read;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TermFileReaderTest {
-  TermFileReader termFileReader;
   String pathToResources = "src/test/resources/";
 
   @Test
   void testFileDoesNotExist() {
-    termFileReader = new TermFileReader("fileDoesNotExist");
-    assertThrows(FileNotFoundException.class, () -> termFileReader.read());
+    assertThrows(FileNotFoundException.class, () -> read("fileDoesNotExist"));
   }
 
   @Test
   void testOneTermInFile() throws FileNotFoundException {
-    termFileReader = new TermFileReader(pathToResources + "oneTerm");
     String expected = "firstTerm";
 
-    assertThat(termFileReader.read()).containsExactly(expected);
+    assertThat(read(pathToResources + "oneTerm")).containsExactly(expected);
   }
 
   @Test
   void testMultipleTerms() throws FileNotFoundException {
-    termFileReader = new TermFileReader(pathToResources + "multipleTerms");
     List<String> expected = List.of("firstTerm", "secondTerm", "thirdTerm");
 
-    assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+    assertThat(read(pathToResources + "multipleTerms")).containsExactlyElementsOf(expected);
   }
 
   @Test
   void testNoTermsInFile() {
-    termFileReader = new TermFileReader(pathToResources + "noTerms");
-
-    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
+    assertThrows(MisconfigurationException.class, () -> read(pathToResources + "noTerms"));
   }
 
   @Test
   void testEmptyLinesInFile() {
-    termFileReader = new TermFileReader(pathToResources + "emptyLines");
-
-    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
+    assertThrows(MisconfigurationException.class, () -> read(pathToResources + "emptyLines"));
   }
 
   @Test
   void testOnlyBlankTerms() {
-    termFileReader = new TermFileReader(pathToResources + "blankTerms");
-
-    assertThrows(MisconfigurationException.class, () -> termFileReader.read());
+    assertThrows(MisconfigurationException.class, () -> read(pathToResources + "blankTerms"));
   }
 
   @Test
   void testBlankTermsBetweenAreIgnored() throws FileNotFoundException {
-    termFileReader = new TermFileReader(pathToResources + "termsAndBlanks");
     List<String> expected = List.of("one", "two", "three", "four");
 
-    assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+    assertThat(read(pathToResources + "termsAndBlanks")).containsExactlyElementsOf(expected);
   }
 
   @Test
   void testRemoveTrailingWhitespaces() throws FileNotFoundException {
-    termFileReader = new TermFileReader(pathToResources + "termsWithTrailingWhitespaces");
     List<String> expected = List.of("one", "two", "three", "horse power");
 
-    assertThat(termFileReader.read()).containsExactlyElementsOf(expected);
+    assertThat(read(pathToResources + "termsWithTrailingWhitespaces")).containsExactlyElementsOf(expected);
   }
 }

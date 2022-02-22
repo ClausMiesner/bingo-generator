@@ -38,8 +38,7 @@ public class App {
   }
 
   private static List<String> readTermsFromFile(String pathToFile) throws FileNotFoundException {
-    var termFileReader = new TermFileReader(pathToFile);
-    return termFileReader.read();
+    return TermFileReader.read(pathToFile);
   }
 
   private static List<String> addTermsFromCommandLine(String[] args) {
