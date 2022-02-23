@@ -85,7 +85,7 @@ public class LatexExpression {
    * Start of LaTex file.
    * </p>
    */
-  public static final String DOCUMENT_START = "\\documentclass{article}" + LINE_BREAK + PACKAGE_IMPORT + TABLE_DEFINITION + "\\begin{document}" + LINE_BREAK;
+  public static final String DOCUMENT_START = "\\documentclass[14pt]{extarticle}" + LINE_BREAK + PACKAGE_IMPORT + TABLE_DEFINITION + "\\begin{document}" + LINE_BREAK;
 
   /**
    * <p>
