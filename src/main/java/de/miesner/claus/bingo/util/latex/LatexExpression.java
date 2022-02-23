@@ -37,6 +37,12 @@ public class LatexExpression {
   public static final String TABLE_ROW_SEPARATOR = "\\hline";
 
   private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK
+          + "\\usepackage[a4paper," + LINE_BREAK +
+          "            left=1cm," + LINE_BREAK +
+          "            right=1cm," + LINE_BREAK +
+          "            top=1cm," + LINE_BREAK +
+          "            bottom=1cm," + LINE_BREAK +
+          "            footskip=.5cm]{geometry}" + LINE_BREAK
           + "\\renewcommand{\\familydefault}{\\ttdefault}" + LINE_BREAK;
 
   private static final String TABLE_DEFINITION = "\\newcolumntype{z}[1] {" + LINE_BREAK +
