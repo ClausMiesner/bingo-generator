@@ -36,7 +36,8 @@ public class LatexExpression {
    */
   public static final String TABLE_ROW_SEPARATOR = "\\hline";
 
-  private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK;
+  private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK
+          + "\\renewcommand{\\familydefault}{\\ttdefault}" + LINE_BREAK;
 
   private static final String TABLE_DEFINITION = "\\newcolumntype{z}[1] {" + LINE_BREAK +
           "@{{\\centering \\parbox[c]{\\tabcolsep}{\\rule{0pt}{#1 + 2\\tabcolsep}}}} >{\\centering\\arraybackslash}" + LINE_BREAK +
