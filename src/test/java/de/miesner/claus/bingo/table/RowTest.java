@@ -4,16 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static de.miesner.claus.bingo.util.latex.LatexExpression.MAX_CHARS_PER_ROW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RowTest {
 
-  Row row;
+  Row row = new Row(List.of());
 
   @Test
   void testToStringWithoutWords() {
-    this.row = new Row(List.of());
-
     String expected = "";
     assertThat(row.toString()).isEqualTo(expected);
   }
@@ -41,7 +40,6 @@ class RowTest {
 
   @Test
   void testNullEqual() {
-    this.row = new Row(List.of());
     assertThat(row.equals(null)).isFalse();
   }
 
@@ -65,4 +63,54 @@ class RowTest {
     var equalRow = new Row(List.of("one"));
     assertThat(row.equals(equalRow)).isTrue();
   }
+
+  @Test
+  void testSplitNoSplitNeeded() {
+    String word = "one";
+    String expected = "one";
+    assertThat(word.length()).as("The test is valid.").isLessThanOrEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitWordHasMaxLength() {
+    String word = "abbreviation";
+    String expected = "abbreviation";
+    assertThat(word.length()).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitWordTooLong() {
+    String word = "jackhammering";
+    String expected = "jackhammer- ing";
+    assertThat(word.length()).as("The test is valid.").isGreaterThan(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitTwoWordsFit() {
+    String word = "jacks hammer";
+    String expected = "jacks hammer";
+    assertThat(word.length()).as("The test is valid.").isLessThanOrEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitTwoWordsDontFitButSpaceIsAlreadyThere() {
+    String word = "jack's hammering";
+    String expected = "jack's hammering";
+    assertThat(word.length()).as("The test is valid.").isGreaterThan(MAX_CHARS_PER_ROW);
+    assertThat(word.indexOf(" ")).as("The test is valid.").isLessThanOrEqualTo(MAX_CHARS_PER_ROW - 1);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  // Multiple words fit
+  //Multiple words don't fit
+  // split first, second etc.
 }

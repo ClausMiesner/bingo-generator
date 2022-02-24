@@ -93,4 +93,6 @@ public class LatexExpression {
    * </p>
    */
   public static final String DOCUMENT_END = "\\end{document}" + LINE_BREAK;
+
+  public static final int MAX_CHARS_PER_ROW = 12;
 }
