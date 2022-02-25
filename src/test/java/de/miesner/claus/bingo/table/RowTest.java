@@ -86,7 +86,7 @@ class RowTest {
   void testSplitWordTooLong() {
     String word = "jackhammering";
     String expected = "jackhammer- ing";
-    assertThat(word.length()).as("The test is valid.").isGreaterThan(MAX_CHARS_PER_ROW);
+    assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
 
     assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
@@ -110,7 +110,25 @@ class RowTest {
     assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
 
-  // Multiple words fit
-  //Multiple words don't fit
-  // split first, second etc.
+  @Test
+  void testSplitMultipleWordsSpacesPresent() {
+    String word = "jacks hammer hammers";
+    String expected = "jacks hammer hammers";
+    assertThat(word.length()).as("The test is valid.").isGreaterThan(MAX_CHARS_PER_ROW);
+    int indexFirstSpace = word.indexOf(" ");
+    int indexSecondSpace = word.indexOf(" ", indexFirstSpace + 1);
+    assertThat(indexFirstSpace).as("The test is valid.").isLessThanOrEqualTo(MAX_CHARS_PER_ROW);
+    assertThat(indexSecondSpace - indexFirstSpace).as("The test is valid.").isLessThanOrEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitMultipleWordsNeedToBeSplit() {
+    String word = "jack's jackhammering massively";
+    String expected = "jacks's ja- ckhammering massively";
+    assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
 }
