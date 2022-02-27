@@ -19,7 +19,7 @@ public class TermFileReader {
     try {
       while ((term = bufferedReader.readLine()) != null) {
         if (isPresent(term)) {
-          result.add(term.trim());
+          result.add(term.strip());
         }
       }
     } catch (IOException e) {
