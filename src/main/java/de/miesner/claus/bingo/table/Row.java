@@ -18,7 +18,7 @@ public class Row {
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
     for (String word : words) {
-      stringBuilder.append(split(word, MAX_CHARS_PER_ROW))
+      stringBuilder.append(split(word, MAX_ROWS_PER_CELL, MAX_CHARS_PER_ROW))
               .append(TABLE_ROW_ENTRY_CONNECTOR);
     }
     int lastIndex = stringBuilder.lastIndexOf(TABLE_ROW_ENTRY_CONNECTOR);

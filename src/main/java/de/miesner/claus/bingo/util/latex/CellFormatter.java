@@ -3,11 +3,11 @@ package de.miesner.claus.bingo.util.latex;
 public class CellFormatter {
 
 
-  public static String split(String expression, int maxChars) {
+  public static String split(String expression, int maxRowsPerCell, int maxChars) {
     if (expression.length() <= maxChars) {
       return expression;
     }
-    
+
     StringBuilder result = new StringBuilder();
     String[] words = expression.split(" ");
     for (String word : words) {
