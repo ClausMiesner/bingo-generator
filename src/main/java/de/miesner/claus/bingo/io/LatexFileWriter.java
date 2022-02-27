@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.DOCUMENT_END;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.DOCUMENT_START;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.FILE_SUFFIX;
+import static de.miesner.claus.bingo.util.latex.Expression.DOCUMENT_END;
+import static de.miesner.claus.bingo.util.latex.Expression.DOCUMENT_START;
+import static de.miesner.claus.bingo.util.latex.Expression.FILE_SUFFIX;
 
 public class LatexFileWriter {
 

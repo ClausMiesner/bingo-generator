@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
+import static de.miesner.claus.bingo.util.latex.Expression.LINE_BREAK;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_END;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_BREAK;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_SEPARATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;

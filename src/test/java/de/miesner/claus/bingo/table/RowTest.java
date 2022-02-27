@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.MAX_CHARS_PER_ROW;
+import static de.miesner.claus.bingo.util.latex.Expression.MAX_CHARS_PER_ROW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RowTest {
@@ -126,7 +126,7 @@ class RowTest {
   @Test
   void testSplitMultipleWordsNeedToBeSplit() {
     String word = "jack's jackhammering massively";
-    String expected = "jacks's ja- ckhammering massively";
+    String expected = "jacks's jackhammer- ing massively";
     assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
 
     assertThat(row.split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);

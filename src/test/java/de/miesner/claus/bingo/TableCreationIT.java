@@ -2,12 +2,12 @@ package de.miesner.claus.bingo;
 
 import de.miesner.claus.bingo.random.BasicTermRandomizer;
 import de.miesner.claus.bingo.table.Table;
-import de.miesner.claus.bingo.util.latex.LatexExpression;
+import de.miesner.claus.bingo.util.latex.Expression;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPECIFICATION_OFFSET;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_COLUMN_SPECIFICATION_OFFSET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TableCreationIT {
@@ -23,7 +23,7 @@ class TableCreationIT {
             .withColumnSeparator()
             .build();
 
-    String tableStartWithoutColumnSpecification = LatexExpression.TABLE_START.substring(0, TABLE_COLUMN_SPECIFICATION_OFFSET - 1);
+    String tableStartWithoutColumnSpecification = Expression.TABLE_START.substring(0, TABLE_COLUMN_SPECIFICATION_OFFSET - 1);
     assertThat(table.toString())
             .as("Beginning of LaTex Table is correct.").startsWith(tableStartWithoutColumnSpecification)
             .as("Column specification is correct.").containsIgnoringWhitespaces("|X|X|X|X|")
@@ -36,6 +36,6 @@ class TableCreationIT {
             .containsPattern("tea[\\W,\\w]+tea")
             .containsPattern("coffee[\\W,\\w]+coffee")
             .containsPattern("mate[\\W,\\w]+mate")
-            .as("Ending of LaTex Table is correct.").endsWith(LatexExpression.TABLE_END);
+            .as("Ending of LaTex Table is correct.").endsWith(Expression.TABLE_END);
   }
 }

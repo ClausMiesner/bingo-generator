@@ -5,13 +5,13 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.LINE_BREAK;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SEPARATOR;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_COLUMN_SPECIFICATION_OFFSET;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_END;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_BREAK;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_SEPARATOR;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_START;
+import static de.miesner.claus.bingo.util.latex.Expression.LINE_BREAK;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_COLUMN_SEPARATOR;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_COLUMN_SPECIFICATION_OFFSET;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_END;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_BREAK;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_SEPARATOR;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_START;
 
 public class Table {
 

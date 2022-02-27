@@ -1,6 +1,6 @@
 package de.miesner.claus.bingo.util.latex;
 
-public class LatexExpression {
+public class Expression {
 
   /**
    * <p>
@@ -53,7 +53,7 @@ public class LatexExpression {
   /**
    * <p>
    * Provides expression to create the start of a table.
-   * After the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_COLUMN_SPECIFICATION_OFFSET}
+   * After the {@link Expression#TABLE_COLUMN_SPECIFICATION_OFFSET}
    * insert the style for the columns.
    * </p>
    */
@@ -61,7 +61,7 @@ public class LatexExpression {
   /**
    * <p>
    * Offset after which the column design specification has to be inserted into
-   * the {@link de.miesner.claus.bingo.util.latex.LatexExpression#TABLE_START}.
+   * the {@link Expression#TABLE_START}.
    * </p>
    */
   public static final int TABLE_COLUMN_SPECIFICATION_OFFSET = 29;

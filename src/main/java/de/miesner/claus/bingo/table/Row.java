@@ -1,11 +1,10 @@
 package de.miesner.claus.bingo.table;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.LatexExpression.MAX_CHARS_PER_ROW;
-import static de.miesner.claus.bingo.util.latex.LatexExpression.TABLE_ROW_ENTRY_CONNECTOR;
+import static de.miesner.claus.bingo.util.latex.CellFormatter.split;
+import static de.miesner.claus.bingo.util.latex.Expression.MAX_CHARS_PER_ROW;
+import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_ENTRY_CONNECTOR;
 
 public class Row {
 
@@ -27,14 +26,6 @@ public class Row {
       stringBuilder.delete(lastIndex, lastIndex + TABLE_ROW_ENTRY_CONNECTOR.length());
     }
     return stringBuilder.toString();
-  }
-
-  @VisibleForTesting
-  String split(String word, int maxChars) {
-    if (word.length() <= maxChars) {
-      return word;
-    }
-    return word.substring(0, MAX_CHARS_PER_ROW - 3) + "- " + word.substring(MAX_CHARS_PER_ROW - 2);
   }
 
   @Override
