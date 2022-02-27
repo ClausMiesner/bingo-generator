@@ -29,6 +29,17 @@ public class CellFormatter {
   }
 
   private static String splitWord(String word, int maxChars) {
+    if (word.length() >= 2 * maxChars) {
+      int times = word.length() / (maxChars - 1);
+      StringBuilder result = new StringBuilder();
+      for (int i = 0; i < times; i++) {
+        int offset = i * (maxChars - 1);
+        result.append(word, offset, maxChars - 1 + offset);
+        result.append("- ");
+      }
+      result.append(word, times * (maxChars - 1), word.length());
+      return result.toString();
+    }
     return word.substring(0, maxChars - 1) + "- " + word.substring(maxChars - 1);
   }
 }
