@@ -21,7 +21,7 @@ class CellFormatterTest {
   void testSplitWordHasMaxLength() {
     String word = "abbreviation";
     String expected = "abbreviation";
-    assertThat(word.length()).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
+    assertThatMaxCharsIs(word.length());
 
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
@@ -30,7 +30,7 @@ class CellFormatterTest {
   void testSplitWordTooLong() {
     String word = "jackhammering";
     String expected = "jackhammeri- ng";
-    assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
+    assertThatMaxCharsIs(12);
 
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
@@ -71,8 +71,30 @@ class CellFormatterTest {
   void testSplitMultipleWordsNeedToBeSplit() {
     String word = "jack's jackhammering massively";
     String expected = "jack's jackhammeri- ng massively";
-    assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
+    assertThatMaxCharsIs(12);
 
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitSpacesMakeWordTooLong() {
+    String word = "jacks    hammer";
+    String expected = "jacks hammer";
+    assertThatMaxCharsIs(12);
+
+    assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  @Test
+  void testSplitGetsRidOfSpaces() {
+    String word = "   jackhammer   ";
+    String expected = "jackhammer";
+    assertThatMaxCharsIs(12);
+
+    assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
+  private void assertThatMaxCharsIs(int actual) {
+    assertThat(actual).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
   }
 }
