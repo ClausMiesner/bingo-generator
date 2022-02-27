@@ -7,9 +7,13 @@ public class CellFormatter {
     if (expression.length() <= maxChars) {
       return expression;
     }
+    
     StringBuilder result = new StringBuilder();
     String[] words = expression.split(" ");
     for (String word : words) {
+      if (word.isBlank()) {
+        continue;
+      }
       if (wordIsTooLong(word, maxChars)) {
         result.append(splitWord(word, maxChars));
       } else {
