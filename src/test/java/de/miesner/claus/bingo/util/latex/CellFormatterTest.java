@@ -29,7 +29,7 @@ class CellFormatterTest {
   @Test
   void testSplitWordTooLong() {
     String word = "jackhammering";
-    String expected = "jackhammer- ing";
+    String expected = "jackhammeri- ng";
     assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
 
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
@@ -70,7 +70,7 @@ class CellFormatterTest {
   @Test
   void testSplitMultipleWordsNeedToBeSplit() {
     String word = "jack's jackhammering massively";
-    String expected = "jack's jackhammer- ing massively";
+    String expected = "jack's jackhammeri- ng massively";
     assertThat(12).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
 
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);

@@ -1,14 +1,30 @@
 package de.miesner.claus.bingo.util.latex;
 
-import static de.miesner.claus.bingo.util.latex.Expression.MAX_CHARS_PER_ROW;
-
 public class CellFormatter {
 
 
-  public static String split(String word, int maxChars) {
-    if (word.length() <= maxChars) {
-      return word;
+  public static String split(String expression, int maxChars) {
+    if (expression.length() <= maxChars) {
+      return expression;
     }
-    return word.substring(0, MAX_CHARS_PER_ROW - 3) + "- " + word.substring(MAX_CHARS_PER_ROW - 3);
+    StringBuilder result = new StringBuilder();
+    String[] words = expression.split(" ");
+    for (String word : words) {
+      if (wordIsTooLong(word, maxChars)) {
+        result.append(splitWord(word, maxChars));
+      } else {
+        result.append(word);
+      }
+      result.append(" ");
+    }
+    return result.toString().strip();
+  }
+
+  private static boolean wordIsTooLong(String word, int maxChars) {
+    return word.strip().length() > maxChars;
+  }
+
+  private static String splitWord(String word, int maxChars) {
+    return word.substring(0, maxChars - 1) + "- " + word.substring(maxChars - 1);
   }
 }
