@@ -94,6 +94,15 @@ class CellFormatterTest {
     assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
 
+  @Test
+  void testSplitOneLongWordNeedsMultipleHyphenation() {
+    String word = "thisIsAVeryLongWordToCheckHowManyCharsFitInOneCell";
+    String expected = "thisIsAVery- LongWordToC- heckHowMany- CharsFitInO- neCell";
+    assertThatMaxCharsIs(12);
+
+    assertThat(split(word, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
   private void assertThatMaxCharsIs(int actual) {
     assertThat(actual).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
   }
