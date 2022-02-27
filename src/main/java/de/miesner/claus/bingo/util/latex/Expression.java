@@ -94,5 +94,17 @@ public class Expression {
    */
   public static final String DOCUMENT_END = "\\end{document}" + LINE_BREAK;
 
+  /**
+   * <p>
+   * Max number of rows in one single table cell.
+   * </p>
+   */
+  public static final int MAX_ROWS_PER_CELL = 6;
+
+  /**
+   * <p>
+   * Max number of characters in one single row of a table cell.
+   * </p>
+   */
   public static final int MAX_CHARS_PER_ROW = 12;
 }
