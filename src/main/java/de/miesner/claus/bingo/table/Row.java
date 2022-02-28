@@ -2,7 +2,7 @@ package de.miesner.claus.bingo.table;
 
 import java.util.List;
 
-import static de.miesner.claus.bingo.util.latex.CellFormatter.split;
+import static de.miesner.claus.bingo.util.latex.CellFormatter.formatToFitCell;
 import static de.miesner.claus.bingo.util.latex.Expression.MAX_CHARS_PER_ROW;
 import static de.miesner.claus.bingo.util.latex.Expression.MAX_ROWS_PER_CELL;
 import static de.miesner.claus.bingo.util.latex.Expression.TABLE_ROW_ENTRY_CONNECTOR;
@@ -19,7 +19,7 @@ public class Row {
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
     for (String word : words) {
-      stringBuilder.append(split(word, MAX_ROWS_PER_CELL, MAX_CHARS_PER_ROW))
+      stringBuilder.append(formatToFitCell(word, MAX_ROWS_PER_CELL, MAX_CHARS_PER_ROW))
               .append(TABLE_ROW_ENTRY_CONNECTOR);
     }
     int lastIndex = stringBuilder.lastIndexOf(TABLE_ROW_ENTRY_CONNECTOR);
