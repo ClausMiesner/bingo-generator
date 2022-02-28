@@ -114,6 +114,16 @@ class CellFormatterTest {
     assertThat(formatToFitCell(word, MAX_ROWS_PER_CELL, MAX_CHARS_PER_ROW)).isEqualTo(expected);
   }
 
+  @Test
+  void testSplitWordsNeedToBeTruncatedToFit() {
+    String word = "This is a very long sentence to check how many chars fit in one cell and we need to go even longer";
+    String expected = "This is a very long sentence to check how many chars fit in one...";
+    assertThatMaxRowsIs(6);
+    assertThatMaxCharsIs(12);
+
+    assertThat(formatToFitCell(word, MAX_ROWS_PER_CELL, MAX_CHARS_PER_ROW)).isEqualTo(expected);
+  }
+
   private void assertThatMaxCharsIs(int actual) {
     assertThat(actual).as("The test is valid.").isEqualTo(MAX_CHARS_PER_ROW);
   }

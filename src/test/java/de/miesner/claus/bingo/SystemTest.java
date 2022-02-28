@@ -18,7 +18,8 @@ class SystemTest {
           "Dachs", "Ente", "Fuchs", "Wildschwein", "Mader",
           "Eule", "Specht", "Uhu", "Schnabeltier", "Otter",
           "Schnecke", "Spinne", "Ameise", "Frosch", "Tausendfüssler",
-          "zwölfZeichen", "thisIsAVeryLongWordToCheckHowManyCharsFitInOneCellAndWeNeedToGoEvenLonger");
+          "zwölfZeichen", "thisIsAVeryLongWordToCheckHowManyCharsFitInOneCellAndWeNeedToGoEvenLonger",
+          "This is a very long sentence to check how many chars fit in one cell and we need to go even longer");
 
   @Test
   void createBingoFile() {
