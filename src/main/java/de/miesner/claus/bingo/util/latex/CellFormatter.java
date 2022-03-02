@@ -14,7 +14,7 @@ public class CellFormatter {
       if (word.isBlank()) {
         continue;
       }
-      if (wordIsTooLong(word, maxCharsPerRow)) {
+      if (wordIsTooLongForRowOrCell(word, maxCharsPerRow, maxRowsPerCell, result)) {
         result.append(splitAndTruncate(word, maxCharsPerRow, maxRowsPerCell));
       } else {
         result.append(word);
@@ -24,8 +24,17 @@ public class CellFormatter {
     return result.toString().strip();
   }
 
-  private static boolean wordIsTooLong(String word, int maxChars) {
-    return word.strip().length() > maxChars;
+  private static boolean wordIsTooLongForRowOrCell(String word, int maxCharsPerRow, int maxRowsPerCell, StringBuilder sb) {
+    int maxCharsPerCell = calculateMaxCharsPerCell(maxCharsPerRow, maxRowsPerCell);
+    return wordIsTooLongForRow(word, maxCharsPerRow) || wordIsTooLongForCell(word, sb, maxCharsPerCell);
+  }
+
+  private static boolean wordIsTooLongForRow(String word, int maxCharsPerRow) {
+    return word.strip().length() > maxCharsPerRow;
+  }
+
+  private static boolean wordIsTooLongForCell(String word, StringBuilder current, int maxCharsPerCell) {
+    return word.strip().length() + current.length() > maxCharsPerCell;
   }
 
   private static String splitAndTruncate(String word, int maxCharsPerRow, int maxRowsPerCell) {
@@ -34,9 +43,7 @@ public class CellFormatter {
       StringBuilder result = new StringBuilder();
       splitMultipleTimes(word, result, maxCharsPerRow, times);
 
-      // There can be maxRowsPerCell more characters in the result since spaces are not count in latex.
-      // they mark the new line.
-      int maxCharsPerCell = maxCharsPerRow * maxRowsPerCell + (maxRowsPerCell - 1);
+      int maxCharsPerCell = calculateMaxCharsPerCell(maxCharsPerRow, maxRowsPerCell);
       if (hasToBeTruncated(result, maxCharsPerCell)) {
         truncate(result, maxCharsPerCell);
       }
@@ -45,12 +52,8 @@ public class CellFormatter {
     return splitOnce(word, maxCharsPerRow);
   }
 
-  private static void truncate(StringBuilder sb, int maxCharsPerCell) {
-    sb.replace(maxCharsPerCell - 3, sb.length(), "...");
-  }
-
-  private static boolean hasToBeTruncated(StringBuilder sb, int maxCharsPerCell) {
-    return sb.length() > maxCharsPerCell;
+  private static boolean hasToBeSplitMultipleTimes(String word, int maxChars) {
+    return word.length() >= 2 * maxChars;
   }
 
   private static int calculateSplitCount(String word, int maxChars) {
@@ -66,11 +69,21 @@ public class CellFormatter {
     sb.append(word, times * (maxChars - 1), word.length());
   }
 
-  private static String splitOnce(String word, int maxChars) {
-    return word.substring(0, maxChars - 1) + "- " + word.substring(maxChars - 1);
+  private static int calculateMaxCharsPerCell(int maxCharsPerRow, int maxRowsPerCell) {
+    // There can be maxRowsPerCell more characters in the result since spaces are not count in latex.
+    // they mark the new line.
+    return maxCharsPerRow * maxRowsPerCell + (maxRowsPerCell - 1);
   }
 
-  private static boolean hasToBeSplitMultipleTimes(String word, int maxChars) {
-    return word.length() >= 2 * maxChars;
+  private static boolean hasToBeTruncated(StringBuilder sb, int maxCharsPerCell) {
+    return sb.length() > maxCharsPerCell;
+  }
+
+  private static void truncate(StringBuilder sb, int maxCharsPerCell) {
+    sb.replace(maxCharsPerCell - 3, sb.length(), "...");
+  }
+
+  private static String splitOnce(String word, int maxChars) {
+    return word.substring(0, maxChars - 1) + "- " + word.substring(maxChars - 1);
   }
 }
