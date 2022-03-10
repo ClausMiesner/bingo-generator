@@ -9,6 +9,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @SelectPackages({
         "de.miesner.claus.bingo.table",
         "de.miesner.claus.bingo.io",
+        "de.miesner.claus.bingo.util",
         "de.miesner.claus.bingo.random"})
 @SelectClasses({
         BingoTicketGeneratorTest.class,
