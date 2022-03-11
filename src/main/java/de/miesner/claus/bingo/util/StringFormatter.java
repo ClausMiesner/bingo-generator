@@ -8,13 +8,13 @@ public class StringFormatter {
     return truncate(s, maxChars, DEFAULT_ELLIPSIS);
   }
 
-  public String truncate(String s, int maxChars, String ending) {
+  public String truncate(String s, int maxChars, String ellipsis) {
     if (maxChars < 0 || s.length() <= maxChars) {
       return s;
     }
-    if (maxChars <= ending.length()) {
+    if (maxChars <= ellipsis.length()) {
       return s.substring(0, maxChars);
     }
-    return s.substring(0, maxChars) + DEFAULT_ELLIPSIS;
+    return s.substring(0, maxChars) + ellipsis;
   }
 }

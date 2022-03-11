@@ -53,4 +53,16 @@ class StringFormatterTest {
             .as("Does not end with default ellipsis.")
             .endsWith(DEFAULT_ELLIPSIS);
   }
+
+  @Test
+  void testCustomEllipsis() {
+    String customEllipsis = "__";
+    assertThat(stringFormatter.truncate(example, example.length() - customEllipsis.length(), customEllipsis))
+            .as("Result does does not have the right length.")
+            .hasSameSizeAs(example)
+            .as("Does not have same beginning as original string.")
+            .startsWith(example.substring(0, example.length() - customEllipsis.length()))
+            .as("Does not end with custom ellipsis.")
+            .endsWith(customEllipsis);
+  }
 }
