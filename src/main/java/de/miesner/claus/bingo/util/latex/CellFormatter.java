@@ -11,4 +11,8 @@ public class CellFormatter {
     this.charsPerRow = charsPerRow;
     this.rowsPerCell = rowsPerCell;
   }
+
+  public String formatToFitCell(String cellValue) {
+    return "word";
+  }
 }
