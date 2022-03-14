@@ -13,6 +13,9 @@ public class CellFormatter {
   }
 
   public String formatToFitCell(String cellValue) {
+    if (cellValue.isBlank()) {
+      return "";
+    }
     return "word";
   }
 }
