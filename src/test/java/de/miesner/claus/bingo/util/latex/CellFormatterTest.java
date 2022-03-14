@@ -33,4 +33,13 @@ class CellFormatterTest {
     assertThat(cellFormatter.formatToFitCell(blank)).isEmpty();
     assertThat(cellFormatter.formatToFitCell(empty)).isEmpty();
   }
+
+  @Test
+  void testFormatWordHasMaxLength() {
+    String word = "abbreviation";
+    String expected = "abbreviation";
+    assertThat(word.length()).as("The test is not valid.").isEqualTo(MAX_CHARS_PER_ROW);
+
+    assertThat(cellFormatter.formatToFitCell(word)).isEqualTo(expected);
+  }
 }
