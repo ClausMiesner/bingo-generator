@@ -42,4 +42,13 @@ class CellFormatterTest {
 
     assertThat(cellFormatter.formatToFitCell(word)).isEqualTo(expected);
   }
+
+  @Test
+  void testSplitWordTooLong() {
+    String word = "jackhammering";
+    String expected = "jackhammer- ing";
+    assertThat(word.length()).as("The test is not valid.").isGreaterThan(MAX_CHARS_PER_ROW);
+
+    assertThat(cellFormatter.formatToFitCell(word)).isEqualTo(expected);
+  }
 }
