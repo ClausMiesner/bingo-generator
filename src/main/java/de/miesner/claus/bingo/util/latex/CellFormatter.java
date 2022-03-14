@@ -16,6 +16,6 @@ public class CellFormatter {
     if (cellValue.isBlank()) {
       return "";
     }
-    return "word";
+    return cellValue;
   }
 }
