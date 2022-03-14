@@ -24,4 +24,13 @@ class CellFormatterTest {
 
     assertThat(cellFormatter.formatToFitCell(testString)).isEqualTo(expected);
   }
+
+  @Test
+  void testFormatWithEmptyAndBlankString() {
+    String blank = "   ";
+    String empty = "";
+
+    assertThat(cellFormatter.formatToFitCell(blank)).isEmpty();
+    assertThat(cellFormatter.formatToFitCell(empty)).isEmpty();
+  }
 }
