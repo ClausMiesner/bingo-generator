@@ -108,9 +108,19 @@ class StringFormatterTest {
     String tooLongString = "jackhammer";
     int maxLength = 4;
     String expected = "jack- hammer";
-    
+
     assertThat(stringFormatter.hyphenate(tooLongString, maxLength))
             .as("The string should be truncated.")
             .isEqualTo(expected);
+  }
+
+  @Test
+  void testHyphenateExpressionTooLongButMultipleWords() {
+    String s = "jack hammer";
+    int maxLength = "hammer".length();
+
+    assertThat(stringFormatter.hyphenate(s, maxLength))
+            .as("String should not be modified.")
+            .isEqualTo(s);
   }
 }
