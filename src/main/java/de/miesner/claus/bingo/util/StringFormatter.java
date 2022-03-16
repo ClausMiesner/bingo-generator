@@ -19,6 +19,12 @@ public class StringFormatter {
   }
 
   public String hyphenate(String expression, int maxLengthWord) {
+    if (expression.isEmpty()) {
+      return "";
+    }
+    if (expression.length() == maxLengthWord) {
+      return expression;
+    }
     return "";
   }
 }
