@@ -80,4 +80,11 @@ class StringFormatterTest {
     assertThat(stringFormatter.hyphenate(blank, 0)).as("Blank string is returned empty")
             .isEmpty();
   }
+
+  @Test
+  void testHyphenateNotNeeded() {
+    assertThat(stringFormatter.hyphenate(example, sameLength))
+            .as("String has max length and doesn't need to be hyphenated.")
+            .isEqualTo(example);
+  }
 }
