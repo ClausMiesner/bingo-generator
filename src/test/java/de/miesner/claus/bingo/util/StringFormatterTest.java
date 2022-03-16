@@ -65,4 +65,12 @@ class StringFormatterTest {
             .as("Does not end with custom ellipsis.")
             .endsWith(customEllipsis);
   }
+
+  @Test
+  void testHyphenateEmptyString() {
+    String empty = "";
+    assertThat(stringFormatter.hyphenate(empty, 1))
+            .as("An empty string doesn't need to be hyphenated.")
+            .isEmpty();
+  }
 }

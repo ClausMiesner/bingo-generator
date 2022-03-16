@@ -17,4 +17,8 @@ public class StringFormatter {
     }
     return s.substring(0, maxChars) + ellipsis;
   }
+
+  public String hyphenate(String expression, int maxLengthWord) {
+    return "";
+  }
 }
