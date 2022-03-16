@@ -73,4 +73,11 @@ class StringFormatterTest {
             .as("An empty string doesn't need to be hyphenated.")
             .isEmpty();
   }
+
+  @Test
+  void testHyphenateBlankString() {
+    String blank = "  ";
+    assertThat(stringFormatter.hyphenate(blank, 0)).as("Blank string is returned empty")
+            .isEmpty();
+  }
 }
