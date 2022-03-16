@@ -87,4 +87,11 @@ class StringFormatterTest {
             .as("String has max length and doesn't need to be hyphenated.")
             .isEqualTo(example);
   }
+
+  @Test
+  void testHyphenateStringShorter() {
+    assertThat(stringFormatter.hyphenate(example, ++sameLength))
+            .as("String is shorter than allowed and doesn't need to be modified")
+            .isEqualTo(example);
+  }
 }
