@@ -22,6 +22,7 @@ public class StringFormatter {
     if (expression.isEmpty()) {
       return "";
     }
+    expression = expression.strip();
     if (expression.length() <= maxLengthWord) {
       return expression;
     }
