@@ -26,6 +26,10 @@ public class StringFormatter {
     if (expression.length() <= maxLengthWord) {
       return expression;
     }
-    return "";
+    return addHyphen(expression, maxLengthWord);
+  }
+
+  private String addHyphen(String expression, int nThChar) {
+    return expression.substring(0, nThChar) + "- " + expression.substring(nThChar);
   }
 }
