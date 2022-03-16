@@ -94,4 +94,12 @@ class StringFormatterTest {
             .as("String is shorter than allowed and doesn't need to be modified")
             .isEqualTo(example);
   }
+
+  @Test
+  void testHyphenateOnlyWhiteSpacesMakeStringTooLong() {
+    String modifiedExample = "   " + example + "   ";
+    assertThat(stringFormatter.hyphenate(modifiedExample, sameLength))
+            .as("String shouldn't be modified.")
+            .isEqualTo(example);
+  }
 }
