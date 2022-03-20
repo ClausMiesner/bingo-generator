@@ -26,7 +26,21 @@ public class StringFormatter {
     if (expression.length() <= maxLengthWord) {
       return expression;
     }
-    return addHyphen(expression, maxLengthWord);
+    return hyphenateSpaceAware(expression, maxLengthWord);
+  }
+
+  private String hyphenateSpaceAware(String expression, int maxLengthWord) {
+    String[] words = expression.split(" ");
+    StringBuilder result = new StringBuilder();
+    for (String word : words) {
+      if (word.length() > maxLengthWord) {
+        result.append(addHyphen(word, maxLengthWord));
+      } else {
+        result.append(word);
+      }
+      result.append(" ");
+    }
+    return result.toString().strip();
   }
 
   private String addHyphen(String expression, int nThChar) {
