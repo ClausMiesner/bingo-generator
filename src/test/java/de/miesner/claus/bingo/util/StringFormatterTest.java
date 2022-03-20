@@ -123,4 +123,13 @@ class StringFormatterTest {
             .as("String should not be modified.")
             .isEqualTo(s);
   }
+
+  @Test
+  void testHyphenateMultipleWordsOneTooLong() {
+    String s = "jack's jackhammering";
+    int maxLength = "jack's".length();
+    String expected = "jack's jackha- mmering";
+
+    assertThat(stringFormatter.hyphenate(s, maxLength)).isEqualTo(expected);
+  }
 }
