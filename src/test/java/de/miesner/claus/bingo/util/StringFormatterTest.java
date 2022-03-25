@@ -106,7 +106,7 @@ class StringFormatterTest {
   @Test
   void testHyphenateExpressionIsTooLong() {
     String tooLongString = "jackhammer";
-    int maxLength = 4;
+    int maxLength = 5;
     String expected = "jack- hammer";
 
     assertThat(stringFormatter.hyphenate(tooLongString, maxLength))
@@ -128,7 +128,7 @@ class StringFormatterTest {
   void testHyphenateMultipleWordsOneTooLong() {
     String s = "jack's jackhammering";
     int maxLength = "jack's".length();
-    String expected = "jack's jackha- mmering";
+    String expected = "jack's jackh- ammering";
 
     assertThat(stringFormatter.hyphenate(s, maxLength)).isEqualTo(expected);
   }

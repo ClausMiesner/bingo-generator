@@ -46,7 +46,7 @@ class CellFormatterTest {
   @Test
   void testSplitWordTooLong() {
     String word = "jackhammering";
-    String expected = "jackhammer- ing";
+    String expected = "jackhammeri- ng";
     assertThat(word.length()).as("The test is not valid.").isGreaterThan(MAX_CHARS_PER_ROW);
 
     assertThat(cellFormatter.formatToFitCell(word)).isEqualTo(expected);

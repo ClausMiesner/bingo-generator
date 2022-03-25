@@ -44,6 +44,6 @@ public class StringFormatter {
   }
 
   private String addHyphen(String expression, int nThChar) {
-    return expression.substring(0, nThChar) + "- " + expression.substring(nThChar);
+    return expression.substring(0, nThChar - 1) + "- " + expression.substring(nThChar - 1);
   }
 }
