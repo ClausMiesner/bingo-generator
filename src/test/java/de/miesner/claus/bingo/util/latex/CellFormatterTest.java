@@ -51,4 +51,25 @@ class CellFormatterTest {
 
     assertThat(cellFormatter.formatToFitCell(word)).isEqualTo(expected);
   }
+
+  @Test
+  void testOneWordInExpressionTooLong() {
+    String expression = "This is hammer";
+    int maxCharsPerRow = 4;
+    cellFormatter = new CellFormatter(maxCharsPerRow, MAX_ROWS_PER_CELL);
+    String expected = "This is ham- mer";
+
+    assertThat(cellFormatter.formatToFitCell(expression)).isEqualTo(expected);
+  }
+
+  @Test
+  void wordTooLongForCellTruncate() {
+    String veryLongWord = "supercalifragilisticexpialidocious";
+    int maxCharsPerRow = 8;
+    int maxRowsPerCell = 1;
+    cellFormatter = new CellFormatter(maxCharsPerRow, maxRowsPerCell);
+    String expected = "super...";
+
+    assertThat(cellFormatter.formatToFitCell(veryLongWord)).isEqualTo(expected);
+  }
 }
