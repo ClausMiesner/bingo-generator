@@ -3,7 +3,7 @@
 ## Abstract
 
 Use this bingo generator to create bingo tickets. It can be used to create multiple bingo tickets from a set of possible
-bingo terms. The bingo generator will produce a compile-ready <code>bingo.tex</code> LaTex file which you can be
+bingo terms. The bingo generator will produce a compile-ready <code>bingo.tex</code> LaTex file, which can be
 transformed into a printable <code>bingo.pdf</code> with a single command.
 
 Never has it been easier to create multiple bingo tickets.
@@ -38,8 +38,9 @@ java -jar <pathOfJar> <numberTickets> <rowsPerTicket> <path> <terms>
 * `numberOfTickets` is an integer number specifying the amount of bingo tickets that will be created,
 * `rowsPerTicket` is an integer number specifying the number of rows per bingo tickets,
 * `path` is the path to the location where the bingo ticket file should be created,
-* `terms` are the possible terms for all bingo tickets seperated by single spaces or the path of a file containing all
-  terms. The terms in the file have to be written one on each line. There is no separator needed.
+* `terms` are the possible terms for all bingo tickets seperated by single spaces **or** the path of a file containing
+  all terms. If you want to provide a file with the terms, then the terms in the file have to be written one on each
+  line. There is no separator needed.
   > List of terms containing 4 entries:
   ```text
   firstTerm
