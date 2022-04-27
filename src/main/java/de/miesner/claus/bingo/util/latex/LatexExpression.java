@@ -36,7 +36,14 @@ public class LatexExpression {
    */
   public static final String TABLE_ROW_SEPARATOR = "\\hline";
 
-  private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK;
+  private static final String PACKAGE_IMPORT = "\\usepackage{array} \\usepackage{tabularx} \\usepackage{calc} \\usepackage[ngerman]{babel}" + LINE_BREAK
+          + "\\usepackage[a4paper," + LINE_BREAK +
+          "            left=1cm," + LINE_BREAK +
+          "            right=1cm," + LINE_BREAK +
+          "            top=1cm," + LINE_BREAK +
+          "            bottom=1cm," + LINE_BREAK +
+          "            footskip=.5cm]{geometry}" + LINE_BREAK
+          + "\\renewcommand{\\familydefault}{\\ttdefault}" + LINE_BREAK;
 
   private static final String TABLE_DEFINITION = "\\newcolumntype{z}[1] {" + LINE_BREAK +
           "@{{\\centering \\parbox[c]{\\tabcolsep}{\\rule{0pt}{#1 + 2\\tabcolsep}}}} >{\\centering\\arraybackslash}" + LINE_BREAK +
@@ -78,7 +85,7 @@ public class LatexExpression {
    * Start of LaTex file.
    * </p>
    */
-  public static final String DOCUMENT_START = "\\documentclass{article}" + LINE_BREAK + PACKAGE_IMPORT + TABLE_DEFINITION + "\\begin{document}" + LINE_BREAK;
+  public static final String DOCUMENT_START = "\\documentclass[14pt]{extarticle}" + LINE_BREAK + PACKAGE_IMPORT + TABLE_DEFINITION + "\\begin{document}" + LINE_BREAK;
 
   /**
    * <p>
@@ -86,4 +93,18 @@ public class LatexExpression {
    * </p>
    */
   public static final String DOCUMENT_END = "\\end{document}" + LINE_BREAK;
+
+  /**
+   * <p>
+   * Max number of rows in one single table cell.
+   * </p>
+   */
+  public static final int MAX_ROWS_PER_CELL = 6;
+
+  /**
+   * <p>
+   * Max number of characters in one single row of a table cell.
+   * </p>
+   */
+  public static final int MAX_CHARS_PER_ROW = 12;
 }
