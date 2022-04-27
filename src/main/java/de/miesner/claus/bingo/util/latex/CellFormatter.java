@@ -21,6 +21,12 @@ public class CellFormatter {
     if (cellValue.isBlank()) {
       return "";
     }
+
+    if (cellValue.strip().length() > charsPerRow * rowsPerCell) {
+      return stringFormatter.truncate(cellValue, charsPerRow);
+    }
+    /* Todo: cellValues could need multiple truncation.
+     *    There could be spaces, which automatically lead to a line break. */
     return stringFormatter.hyphenate(cellValue, charsPerRow);
   }
 }

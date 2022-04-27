@@ -15,7 +15,7 @@ public class StringFormatter {
     if (maxChars <= ellipsis.length()) {
       return s.substring(0, maxChars);
     }
-    return s.substring(0, maxChars) + ellipsis;
+    return s.substring(0, maxChars - ellipsis.length()) + ellipsis;
   }
 
   public String hyphenate(String expression, int maxLengthWord) {
