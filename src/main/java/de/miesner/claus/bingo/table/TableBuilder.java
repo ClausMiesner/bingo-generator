@@ -3,9 +3,13 @@ package de.miesner.claus.bingo.table;
 import com.google.common.annotations.VisibleForTesting;
 import de.miesner.claus.bingo.MisconfigurationException;
 import de.miesner.claus.bingo.random.TermRandomizer;
+import de.miesner.claus.bingo.util.latex.CellFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static de.miesner.claus.bingo.util.latex.LatexExpression.MAX_CHARS_PER_ROW;
+import static de.miesner.claus.bingo.util.latex.LatexExpression.MAX_ROWS_PER_CELL;
 
 public class TableBuilder {
 
@@ -14,6 +18,7 @@ public class TableBuilder {
   private boolean hasColumnSeparator = false;
   private List<String> possibleBingoTerms;
   private int maxOccurrencesForTerm = 1;
+  private final CellFormatter cellFormatter = new CellFormatter(MAX_CHARS_PER_ROW, MAX_ROWS_PER_CELL);
 
   /**
    * <p>
@@ -107,7 +112,8 @@ public class TableBuilder {
   private void addTermsRandomly(int fieldsPerRow, List<String> termsForTable) {
     for (int row = 0; row < numberOfRows; row++) {
       for (int field = 0; field < fieldsPerRow; field++) {
-        termsForTable.add(termRandomizer.getNextTerm());
+        String nextTerm = termRandomizer.getNextTerm();
+        termsForTable.add(cellFormatter.formatToFitCell(nextTerm));
       }
     }
   }
