@@ -10,3 +10,6 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 .idea/*
+
+# Test resource - Serves only as an example
+src/test/resources/bingo.tex
