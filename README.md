@@ -48,6 +48,14 @@ java -jar <pathOfJar> <numberTickets> <rowsPerTicket> <path> <terms>
   Two words
   as one
   ```
+
+### If you want to create a <code>bingo.tex</code> inside with help of your IDE ...
+
+... have a look at the <code>SystemTest</code>. There you can see what methods to call and how to set up the list of
+word. When the test is run you can have a look into the <code>test/resources</code> folder. There you will find a newly
+generated bingo.tex file. <br>
+Create your own test method & run the shown method with your own list of words to create your very own bingo.tex file.
+
 ### Installing compiler for creating pdf file
 
 The bingo tickets are written into a <code>bingo.tex</code> file, which is a [LaTex](https://www.latex-project.org)
