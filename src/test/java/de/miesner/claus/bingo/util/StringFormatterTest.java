@@ -45,11 +45,12 @@ class StringFormatterTest {
 
   @Test
   void testTruncateIsNeeded() {
-    assertThat(stringFormatter.truncate(example, example.length() - DEFAULT_ELLIPSIS.length()))
-            .as("Although only the last chars of the string should have been substituted, the size of the result string is different.")
-            .hasSameSizeAs(example)
+    int maxChars = example.length() - DEFAULT_ELLIPSIS.length();
+    assertThat(stringFormatter.truncate(example, maxChars))
+            .as("Size after truncate is not correct.")
+            .hasSameSizeAs("exam")
             .as("Does not have same beginning as original string.")
-            .startsWith(example.substring(0, example.length() - DEFAULT_ELLIPSIS.length()))
+            .startsWith(example.substring(0, maxChars - DEFAULT_ELLIPSIS.length()))
             .as("Does not end with default ellipsis.")
             .endsWith(DEFAULT_ELLIPSIS);
   }
@@ -57,11 +58,13 @@ class StringFormatterTest {
   @Test
   void testCustomEllipsis() {
     String customEllipsis = "__";
-    assertThat(stringFormatter.truncate(example, example.length() - customEllipsis.length(), customEllipsis))
-            .as("Result does does not have the right length.")
-            .hasSameSizeAs(example)
+    String exampleWord = "exampleWord";
+    int maxLength = exampleWord.length() - 4;
+    assertThat(stringFormatter.truncate(exampleWord, maxLength, customEllipsis))
+            .as("Result does not have the right length.")
+            .hasSize(maxLength)
             .as("Does not have same beginning as original string.")
-            .startsWith(example.substring(0, example.length() - customEllipsis.length()))
+            .startsWith(exampleWord.substring(0, maxLength - customEllipsis.length()))
             .as("Does not end with custom ellipsis.")
             .endsWith(customEllipsis);
   }
