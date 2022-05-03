@@ -12,4 +12,4 @@ buildNumber.properties
 .idea/*
 
 # Test resource - Serves only as an example
-src/test/resources/bingo.tex
+src/test/resources/bingo.*
